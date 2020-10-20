@@ -45,7 +45,5 @@ public class TaskTreePanel extends JPanel{
         scrollPane.getViewport().setView(taskTree);
         scrollPane.setBounds(5,50,width - 10, height-52);
         this.add(scrollPane);
-
-
     }
 }

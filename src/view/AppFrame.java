@@ -10,6 +10,7 @@ public class AppFrame extends JFrame {
     private int height=800;
     private int width=800;
     private TaskTreePanel task_tree_panel;
+    private AddTaskPanel add_task_panel;
 
 
     public AppFrame(Model model) throws HeadlessException{
@@ -26,8 +27,8 @@ public class AppFrame extends JFrame {
     private void setDefaultBehaviour(){
         getContentPane().setLayout(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        System.out.println(screenSize.height);
-        System.out.println(screenSize.width);
+        //System.out.println(screenSize.height);
+        //System.out.println(screenSize.width);
         this.setMinimumSize(new Dimension(minimumWidth, minimumHeight));
         this.setMaximumSize(new Dimension(screenSize.width - 892, screenSize.height - 120));
 
@@ -54,14 +55,20 @@ public class AppFrame extends JFrame {
         final int rightColumnWidth = Math.max(Math.max(AddTaskPanel.MIN_WIDTH,
                 TaskTreePanel.MIN_WIDTH), Math.max(CommencedTasksPanel.MIN_WIDTH,
                 CompletedTasksPanel.MIN_WIDTH));
-        System.out.println(this.width);
-        System.out.println(rightColumnWidth);
-        System.out.println(this.width - rightColumnWidth);
+        //System.out.println(this.width);
+        //System.out.println(rightColumnWidth);
+        //System.out.println(this.width - rightColumnWidth);
         final  int rightColumnStart = this.width - rightColumnWidth - 5;
         task_tree_panel = new TaskTreePanel("TASK MANAGEMENT TREE", model ,rightColumnStart-10, height-250, Color.black);
+        //System.out.println("Right column start "+ rightColumnStart);
         task_tree_panel.setLocation(5, 5);
         task_tree_panel.setFocusable(false);
         pane.add(task_tree_panel);
+
+        add_task_panel = new AddTaskPanel("ADD TASK", model, this.width-405, height-250, Color.BLACK);
+        add_task_panel.setLocation(450,5);
+        add_task_panel.setFocusable(false);
+        pane.add(add_task_panel);
     }
 
 }
