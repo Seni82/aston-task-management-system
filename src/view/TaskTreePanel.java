@@ -44,7 +44,7 @@ public class TaskTreePanel extends AbstractCommonComponents{
         this.add(scrollPane);
 
         //Create button through inheritance by calling the method in my abstract class.
-        createJButton(startTaskButton, "Start Task",40, 507,130,40,true, Color.BLACK,true);
-        createJButton(DeleteTaskButton, "Delete Task",220, 507,130,40,true, Color.BLACK,true);
+        createJButton(startTaskButton, "Start Task",40, 507,130,40,false, Color.BLACK,true);
+        createJButton(DeleteTaskButton, "Delete Task",220, 507,130,40,false, Color.BLACK,true);
     }
 }
