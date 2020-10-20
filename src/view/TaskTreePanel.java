@@ -29,13 +29,13 @@ public class TaskTreePanel extends JPanel{
 
         //Add a search field on the task lists.
         searchField = new JTextField("search task");
-        searchField.setBounds(2,20,250,30);
+        searchField.setBounds(2, 20, 250, 30);
         this.add(searchField);
 
         //Add a search button next to search field.
         searchButton = new JButton("Search");
         //searchButton.setBackground();
-        searchButton.setBounds(260,18, 130,33);
+        searchButton.setBounds(260, 18, 130, 33);
         this.add(searchButton);
 
         //Adding Tree with JTree.
@@ -43,7 +43,8 @@ public class TaskTreePanel extends JPanel{
         taskTree.setRootVisible(false);
         scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.getViewport().setView(taskTree);
-        scrollPane.setBounds(5,50,width - 10, height-52);
+        scrollPane.setBounds(5, 50, width - 10, height - 52);
         this.add(scrollPane);
+
     }
 }
