@@ -57,12 +57,12 @@ public class AppFrame extends JFrame {
                 CompletedTasksPanel.MIN_WIDTH));
 
         final  int rightColumnStart = this.width - rightColumnWidth - 5;
-        task_tree_panel = new TaskTreePanel("TASK MANAGEMENT TREE", model ,rightColumnStart-10, height-250, Color.black);
+        task_tree_panel = new TaskTreePanel("TASK MANAGEMENT TREE", model ,rightColumnStart-10, height-250, Color.black, false);
         task_tree_panel.setLocation(5, 5);
         task_tree_panel.setFocusable(false);
         pane.add(task_tree_panel);
 
-        add_task_panel = new AddTaskPanel("ADD TASK", model, this.width-300, height-250, Color.blue);
+        add_task_panel = new AddTaskPanel("ADD TASK", model, this.width-300, height-250, Color.blue, true);
         add_task_panel.setLocation(450,5);
         add_task_panel.setFocusable(false);
         pane.add(add_task_panel);

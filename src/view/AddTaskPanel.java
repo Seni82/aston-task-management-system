@@ -10,12 +10,11 @@ import java.awt.*;
  * @author ganiyuisola
  * @version 20/10/2020
  */
-public class AddTaskPanel extends JPanel {
+public class AddTaskPanel extends AbstractCommonComponents {
 
     static final int FIELD_START = 100;
     public static final int MIN_WIDTH = 390;
     public static final int MIN_HEIGHT = 540;
-    private final Model model;
     private final JLabel panelLabel;
     private final JLabel projectName;
     private final JTextField projectNameEntry;
@@ -43,15 +42,17 @@ public class AddTaskPanel extends JPanel {
     private final JLabel highAndHighestPriotityRangeDescription;
     private final JLabel estimatedTaskDuration;
     private final JTextField estimatedTaskDurationField;
+    private JButton clearTaskButton;
+    private JButton taskUpdateButton;
+    private Model model;
+    private JButton addTaskButton;
 
-    public AddTaskPanel(String taskPanelTitle, Model model, int width, int height, Color color) {
+    public AddTaskPanel(String taskPanelTitle, Model model, int width, int height, Color color, Boolean createBorder) {
+        super(model, width,height, color, createBorder);
         this.model = model;
-        this.setLayout(null);
-        this.setSize(width, height);
+
         this.setBorder(BorderFactory.createLineBorder(color));
         Border blackLine = BorderFactory.createTitledBorder("");
-
-
         panelLabel = new JLabel(taskPanelTitle, SwingConstants.CENTER);
         panelLabel.setBorder(blackLine);
         panelLabel.setBounds(0, 2, width, 15);
@@ -192,12 +193,12 @@ public class AddTaskPanel extends JPanel {
         estimatedTaskDurationField.setBounds(FIELD_START, 365, 150, 25);
         this.add(estimatedTaskDurationField);
 
+        //create buttons
+        createJButton(addTaskButton,"Add Task", 40, 505, 130, 40, true,Color.blue,true);
+        createJButton(taskUpdateButton,"Update Task",190, 505, 130,40, false, Color.blue, true);
+        createJButton(clearTaskButton,"Clear Field",340, 505, 130,40, false, Color.blue, true);
+
     }
 }
 
-
-
-
-//, [7 - 9: HIGH] , [10: HIGHEST]"
-//searchField.setBounds(2, 20, 250, 30);
 
