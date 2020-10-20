@@ -182,7 +182,7 @@ public class AddTaskPanel extends JPanel {
         highAndHighestPriotityRangeDescription.setForeground(Color.blue);
         this.add(highAndHighestPriotityRangeDescription);
 
-        estimatedTaskDuration = new JLabel("Est Duration:");
+        estimatedTaskDuration = new JLabel("Est. Duration:");
         estimatedTaskDuration.setBounds(5, 370, FIELD_START-2, 15);
         estimatedTaskDuration.setFocusable(false);
         estimatedTaskDuration.setForeground(Color.blue);
