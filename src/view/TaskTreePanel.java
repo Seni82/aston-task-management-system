@@ -41,9 +41,9 @@ public class TaskTreePanel extends JPanel{
         //Adding Tree with JTree.
         JTree taskTree = new JTree();
         taskTree.setRootVisible(false);
-        scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.getViewport().setView(taskTree);
-        scrollPane.setBounds(5,50,width - 10, height-23);
+        scrollPane.setBounds(5,50,width - 10, height-52);
         this.add(scrollPane);
 
 
