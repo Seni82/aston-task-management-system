@@ -3,8 +3,6 @@ import model.Model;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 
 /**
@@ -40,8 +38,11 @@ public class AddTaskPanel extends JPanel {
     private final JLabel taskDueTime;
     private final JTextField taskDueTimeEntry;
     private final JComboBox importanceDropDownComponent;
-    private final JLabel priotityRangeDescription;
+    private final JLabel lowAndMediumPriorityRangeDescription;
     private final JLabel taskImportance;
+    private final JLabel highAndHighestPriotityRangeDescription;
+    private final JLabel estimatedTaskDuration;
+    private final JTextField estimatedTaskDurationField;
 
     public AddTaskPanel(String taskPanelTitle, Model model, int width, int height, Color color) {
         this.model = model;
@@ -49,6 +50,8 @@ public class AddTaskPanel extends JPanel {
         this.setSize(width, height);
         this.setBorder(BorderFactory.createLineBorder(color));
         Border blackLine = BorderFactory.createTitledBorder("");
+
+
         panelLabel = new JLabel(taskPanelTitle, SwingConstants.CENTER);
         panelLabel.setBorder(blackLine);
         panelLabel.setBounds(0, 2, width, 15);
@@ -164,20 +167,37 @@ public class AddTaskPanel extends JPanel {
         importanceDropDownComponent.setBounds(FIELD_START, 295, 100, 25);
         this.add(importanceDropDownComponent);
 
-        priotityRangeDescription =
-                new JLabel("[0 - 4: LOW]");
-                        //+
-                        //"[5 - 7] : MEDIUM IMPORTANCE, [8 - 10] : HIGH IMPORTANCE");
-        priotityRangeDescription.setBounds(200, 300, FIELD_START - 2, 15);
-        priotityRangeDescription.setFocusable(false);
-        priotityRangeDescription.setForeground(Color.blue);
-        this.add(priotityRangeDescription);
+        lowAndMediumPriorityRangeDescription =
+                new JLabel("[0 - 3 : LOW]        [4 - 6 : MEDIUM]");
+        lowAndMediumPriorityRangeDescription.setBounds(220, 300, FIELD_START + 200, 15);
+        lowAndMediumPriorityRangeDescription.setFocusable(false);
+        lowAndMediumPriorityRangeDescription.setForeground(Color.blue);
+        this.add(lowAndMediumPriorityRangeDescription);
+
+
+        highAndHighestPriotityRangeDescription =
+                new JLabel("[7 - 9 : HIGH]       [10 : HIGHEST]");
+        highAndHighestPriotityRangeDescription.setBounds(220, 320, FIELD_START + 200, 15);
+        highAndHighestPriotityRangeDescription.setFocusable(false);
+        highAndHighestPriotityRangeDescription.setForeground(Color.blue);
+        this.add(highAndHighestPriotityRangeDescription);
+
+        estimatedTaskDuration = new JLabel("Est Duration:");
+        estimatedTaskDuration.setBounds(5, 370, FIELD_START-2, 15);
+        estimatedTaskDuration.setFocusable(false);
+        estimatedTaskDuration.setForeground(Color.blue);
+        this.add(estimatedTaskDuration);
+
+        estimatedTaskDurationField = new JTextField();
+        estimatedTaskDurationField.setBounds(FIELD_START, 365, 150, 25);
+        this.add(estimatedTaskDurationField);
+
     }
 }
 
 
 
 
-
+//, [7 - 9: HIGH] , [10: HIGHEST]"
 //searchField.setBounds(2, 20, 250, 30);
 
