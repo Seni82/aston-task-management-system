@@ -8,7 +8,6 @@ public class TaskTreePanel extends AbstractCommonComponents{
 
     public static final int MIN_WIDTH = 390;
     public static final int MIN_HEIGHT = 540;
-    private final JLabel panelLabel;
     private final JTextField searchField;
     private final JButton searchButton;
     private final JScrollPane scrollPane;
@@ -16,14 +15,8 @@ public class TaskTreePanel extends AbstractCommonComponents{
     private JButton startTaskButton;
     private Model model;
 
-    public TaskTreePanel(String taskPanelTitle, Model model, int width, int height, Color color, Boolean createBorder) {
-        super(model, width, height, color, createBorder);
-        this.model = model;
-        panelLabel = new JLabel(taskPanelTitle, SwingConstants.CENTER);
-        panelLabel.setBounds(0, 2, width, 15);
-        panelLabel.setForeground(color);
-        panelLabel.setFocusable(false);
-        this.add(panelLabel);
+    public TaskTreePanel(String taskTreePanelTitle,int x, int y, Model model, int width, int height, Color color, Boolean createBorder, int boundsHeight) {
+        super(taskTreePanelTitle,model, x, y, width, height, color, createBorder, boundsHeight);
 
         //Add a search field on the task lists.
         searchField = new JTextField("search task");
@@ -32,7 +25,7 @@ public class TaskTreePanel extends AbstractCommonComponents{
 
         //Add a search button next to search field.
         searchButton = new JButton("Search");
-        searchButton.setBounds(260, 18, 130, 33);
+        searchButton.setBounds(260, 18, 125, 33);
         this.add(searchButton);
 
         //Adding Tree with JTree.

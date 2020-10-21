@@ -5,16 +5,22 @@ import javax.swing.border.Border;
 import java.awt.*;
 
 public abstract class AbstractCommonComponents extends JPanel {
-    private final Model model;
+    protected final Model model;
 
     //common functionality between panel is added here
 
-    public AbstractCommonComponents(Model model, int width, int height, Color color, Boolean createBorderLine)
+    public AbstractCommonComponents(String panelTitle , Model model,int x, int y, int width, int height, Color color, Boolean createTitleBoder, int boundsHeight)
     {
         this.model = model;
         this.setLayout(null);
         this.setSize(width, height);
         this.setBorder(BorderFactory.createLineBorder(color));
+        JLabel panelLabel = new JLabel(panelTitle, SwingConstants.CENTER);
+        if(createTitleBoder == true){Border blackLine = BorderFactory.createTitledBorder(""); panelLabel.setBorder(blackLine);}
+        panelLabel.setBounds(x, y, width, boundsHeight);
+        panelLabel.setForeground(color);
+        panelLabel.setFocusable(false);
+        this.add(panelLabel);
     }
 
     public void createJButton(JButton buttonName, String title, int x, int y, int width, int height, Boolean buttonEnabled, Color color, Boolean setButtonColor)
@@ -22,10 +28,7 @@ public abstract class AbstractCommonComponents extends JPanel {
         buttonName = new JButton(title);
         buttonName.setBounds(x, y, width, height);
         buttonName.setEnabled(buttonEnabled);
-        if(setButtonColor == true){
-            buttonName.setBackground(color);
-            buttonName.setForeground(color);
-        }
+        if(setButtonColor == true){buttonName.setBackground(color);buttonName.setForeground(color);}
         this.add(buttonName);
     }
 }

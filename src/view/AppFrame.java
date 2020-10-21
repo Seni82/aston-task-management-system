@@ -6,15 +6,16 @@ import java.awt.*;
 public class AppFrame extends JFrame {
 
     private final int minimumWidth = 954;
-    private final int minimumHeight = 990;
+    private final int minimumHeight = 1000;
     private int height=800;
     private int width=800;
     private TaskTreePanel task_tree_panel;
     private AddTaskPanel add_task_panel;
+    private CommencedTasksPanel comenced_task_panel;
 
 
     public AppFrame(Model model) throws HeadlessException{
-        super("Task Management System.");
+        super("TASK MANAGEMENT SYSTEM.");
         setDefaultBehaviour();
         initFields(model);
         this.setVisible(true);
@@ -29,8 +30,8 @@ public class AppFrame extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setMinimumSize(new Dimension(minimumWidth, minimumHeight));
         System.out.println(screenSize.width - 838);
-        System.out.println(screenSize.height - 50);
-        this.setMaximumSize(new Dimension(screenSize.width - 838, screenSize.height - 50));
+        System.out.println(screenSize.height - 120);
+        this.setMaximumSize(new Dimension(screenSize.width - 838, screenSize.height - 120));
 
         if (height > screenSize.height) {
             height = screenSize.height;
@@ -49,7 +50,6 @@ public class AppFrame extends JFrame {
     /**
      * This method is to add panels onto the frame.
      */
-
     private void initFields(Model model){
         Container pane = this.getContentPane();
         final int rightColumnWidth = Math.max(Math.max(AddTaskPanel.MIN_WIDTH,
@@ -57,15 +57,23 @@ public class AppFrame extends JFrame {
                 CompletedTasksPanel.MIN_WIDTH));
 
         final  int rightColumnStart = this.width - rightColumnWidth - 5;
-        task_tree_panel = new TaskTreePanel("TASK MANAGEMENT TREE", model ,rightColumnStart-10, height-250, Color.black, false);
+        task_tree_panel  = new TaskTreePanel("TASK MANAGEMENT TREE",0,2,model,rightColumnStart-10,
+                height-250,Color.black, false, 15);
         task_tree_panel.setLocation(5, 5);
         task_tree_panel.setFocusable(false);
         pane.add(task_tree_panel);
 
-        add_task_panel = new AddTaskPanel("ADD TASK", model, this.width-300, height-250, Color.blue, true);
+        add_task_panel = new AddTaskPanel("ADD TASK",model, 0, 2, this.width-300,
+                height-250, Color.blue, true, 15);
         add_task_panel.setLocation(450,5);
         add_task_panel.setFocusable(false);
         pane.add(add_task_panel);
+
+        comenced_task_panel = new CommencedTasksPanel("COMMENCED TASKS",0,1,model, rightColumnStart-10,
+                height-387,Color.blue, true,17);
+        comenced_task_panel.setLocation(5,560);
+        comenced_task_panel.setFocusable(false);
+        pane.add(comenced_task_panel);
     }
 
 }

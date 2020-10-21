@@ -15,7 +15,6 @@ public class AddTaskPanel extends AbstractCommonComponents {
     static final int FIELD_START = 100;
     public static final int MIN_WIDTH = 390;
     public static final int MIN_HEIGHT = 540;
-    private final JLabel panelLabel;
     private final JLabel projectName;
     private final JTextField projectNameEntry;
     private final JLabel taskName;
@@ -47,18 +46,9 @@ public class AddTaskPanel extends AbstractCommonComponents {
     private Model model;
     private JButton addTaskButton;
 
-    public AddTaskPanel(String taskPanelTitle, Model model, int width, int height, Color color, Boolean createBorder) {
-        super(model, width,height, color, createBorder);
+    public AddTaskPanel(String addTaskPanelTitle, Model model,int x, int y, int width, int height, Color color, Boolean createBorder, int boundsHeight) {
+        super(addTaskPanelTitle, model, x, y, width,height, color, createBorder, boundsHeight);
         this.model = model;
-
-        this.setBorder(BorderFactory.createLineBorder(color));
-        Border blackLine = BorderFactory.createTitledBorder("");
-        panelLabel = new JLabel(taskPanelTitle, SwingConstants.CENTER);
-        panelLabel.setBorder(blackLine);
-        panelLabel.setBounds(0, 2, width, 15);
-        panelLabel.setForeground(color);
-        panelLabel.setFocusable(false);
-        this.add(panelLabel);
 
         projectName = new JLabel("Project Name:");
         projectName.setBounds(5, 30, FIELD_START - 2, 15);
