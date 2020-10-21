@@ -8,7 +8,6 @@ public abstract class AbstractCommonComponents extends JPanel {
     protected final Model model;
 
     //common functionality between panel is added here
-
     public AbstractCommonComponents(String panelTitle , Model model,int x, int y, int width, int height, Color color, Boolean createTitleBoder, int boundsHeight)
     {
         this.model = model;
@@ -36,8 +35,14 @@ public abstract class AbstractCommonComponents extends JPanel {
         labelName = new JLabel(title);
         labelName.setBounds(x, y, width, height);
         labelName.setBackground(color);
+        labelName.setForeground(color);
+        labelName.setFocusable(false);
         this.add(labelName);
     }
 
-
+    protected void createJTextField(JTextField textFieldName, int FIELD_START, int y, int width, int height){
+        textFieldName = new JTextField();
+        textFieldName.setBounds(FIELD_START, y, width, height);
+        this.add(textFieldName);
+    }
 }
