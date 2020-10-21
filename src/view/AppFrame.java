@@ -11,11 +11,11 @@ public class AppFrame extends JFrame {
     private final int minimumHeight = 1000;
     private int height=800;
     private int width=800;
-    private BasicArrowButton eastFacingArrowButton;
+    private BasicArrowButton eastFacingArrowButtonToMoveSelectedItemForUpdate;
     private TaskTreePanel task_tree_panel;
     private AddTaskPanel add_task_panel;
     private CommencedTasksPanel comenced_task_panel;
-
+    private BasicArrowButton eastFacingArrowForCompletedTasks;
 
 
     public AppFrame(Model model) throws HeadlessException{
@@ -79,16 +79,30 @@ public class AppFrame extends JFrame {
         comenced_task_panel.setFocusable(false);
         pane.add(comenced_task_panel);
 
-        eastFacingArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
-        eastFacingArrowButton.setBounds(406,250,30,40);
-        eastFacingArrowButton.setBackground(Color.CYAN);
-        this.add(eastFacingArrowButton, BorderLayout.EAST);
+        eastFacingArrowButtonToMoveSelectedItemForUpdate = new BasicArrowButton(BasicArrowButton.EAST);
+        eastFacingArrowButtonToMoveSelectedItemForUpdate.setBounds(406,200,30,40);
+        eastFacingArrowButtonToMoveSelectedItemForUpdate.setBackground(Color.CYAN);
+        this.add(eastFacingArrowButtonToMoveSelectedItemForUpdate, BorderLayout.EAST);
 
-        JLabel labelName = new JLabel("Move task.");
-        labelName.setBounds(395, 300, 50, 15);
-        labelName.setBackground(Color.RED);
-        labelName.setForeground(Color.RED);
-        this.add(labelName);
+
+        JLabel labelNameMoveTaskInformationLabel = new JLabel("Move task.");
+        labelNameMoveTaskInformationLabel.setBounds(395, 250, 50, 15);
+        labelNameMoveTaskInformationLabel.setBackground(Color.RED);
+        labelNameMoveTaskInformationLabel.setForeground(Color.RED);
+        this.add(labelNameMoveTaskInformationLabel);
+
+
+        eastFacingArrowForCompletedTasks = new BasicArrowButton(BasicArrowButton.EAST);
+        eastFacingArrowForCompletedTasks.setBounds(400,700, 30, 40);
+        eastFacingArrowForCompletedTasks.setBackground(Color.CYAN);
+        this.add(eastFacingArrowForCompletedTasks, BorderLayout.EAST);
+
+
+        JLabel moveCompletedTaskLabel = new JLabel("Move task.");
+        moveCompletedTaskLabel.setBounds(400, 750, 50, 15);
+        moveCompletedTaskLabel.setBackground(Color.GREEN);
+        moveCompletedTaskLabel.setForeground(Color.GREEN);
+        this.add(moveCompletedTaskLabel);
     }
 
 }
