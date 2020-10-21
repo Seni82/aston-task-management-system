@@ -21,7 +21,7 @@ public abstract class AbstractCommonComponents extends JPanel {
         panelLabel.setFocusable(false);
         this.add(panelLabel);
     }
-    
+
     protected void createJButton(JButton buttonName, String title, int x, int y, int width, int height, Boolean buttonEnabled, Color color, Boolean setButtonColor)
     {
         buttonName = new JButton(title);
