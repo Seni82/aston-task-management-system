@@ -114,7 +114,5 @@ public class AppFrame extends JFrame {
         moveCompletedTaskLabel.setBackground(Color.GREEN);
         moveCompletedTaskLabel.setForeground(Color.GREEN);
         this.add(moveCompletedTaskLabel);
-
     }
-
 }
