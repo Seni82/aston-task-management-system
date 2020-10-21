@@ -1,6 +1,8 @@
 package view;
 import model.Model;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 
 public class AppFrame extends JFrame {
@@ -9,9 +11,11 @@ public class AppFrame extends JFrame {
     private final int minimumHeight = 1000;
     private int height=800;
     private int width=800;
+    private BasicArrowButton eastFacingArrowButton;
     private TaskTreePanel task_tree_panel;
     private AddTaskPanel add_task_panel;
     private CommencedTasksPanel comenced_task_panel;
+
 
 
     public AppFrame(Model model) throws HeadlessException{
@@ -74,6 +78,17 @@ public class AppFrame extends JFrame {
         comenced_task_panel.setLocation(5,560);
         comenced_task_panel.setFocusable(false);
         pane.add(comenced_task_panel);
+
+        eastFacingArrowButton = new BasicArrowButton(BasicArrowButton.EAST);
+        eastFacingArrowButton.setBounds(406,250,30,40);
+        eastFacingArrowButton.setBackground(Color.CYAN);
+        this.add(eastFacingArrowButton, BorderLayout.EAST);
+
+        JLabel labelName = new JLabel("Move task.");
+        labelName.setBounds(395, 300, 50, 15);
+        labelName.setBackground(Color.RED);
+        labelName.setForeground(Color.RED);
+        this.add(labelName);
     }
 
 }

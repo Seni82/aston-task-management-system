@@ -1,6 +1,7 @@
 package view;
 import model.Model;
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 
 
@@ -39,5 +40,6 @@ public class TaskTreePanel extends AbstractCommonComponents{
         //Create button through inheritance by calling the method in my abstract class.
         createJButton(startTaskButton, "Start Task",40, 507,130,40,false, Color.BLACK,true);
         createJButton(DeleteTaskButton, "Delete Task",220, 507,130,40,false, Color.BLACK,true);
+
     }
 }

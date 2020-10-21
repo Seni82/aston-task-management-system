@@ -31,4 +31,11 @@ public abstract class AbstractCommonComponents extends JPanel {
         if(setButtonColor == true){buttonName.setBackground(color);buttonName.setForeground(color);}
         this.add(buttonName);
     }
+
+    public void createJLabel(JLabel labelName, String title,int x , int y, int width, int height, Color color){
+        labelName = new JLabel(title);
+        labelName.setBounds(x, y, width, height);
+        labelName.setBackground(color);
+        this.add(labelName);
+    }
 }
