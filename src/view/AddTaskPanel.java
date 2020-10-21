@@ -91,7 +91,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
         //Importance field and combo box.
         createJLabel(taskImportance, "Importance:",5 , 300, FIELD_START - 2, 15, color);
-        importanceDropDownComponent = new JComboBox(new Model().improtanceIndex);
+        importanceDropDownComponent = new JComboBox(model.getImportanceModel());
         importanceDropDownComponent.setBounds(FIELD_START, 295, 100, 25);
         this.add(importanceDropDownComponent);
 
