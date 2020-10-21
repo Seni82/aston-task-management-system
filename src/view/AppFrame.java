@@ -91,6 +91,7 @@ public class AppFrame extends JFrame {
         eastFacingArrowButtonToMoveSelectedItemForUpdate = new BasicArrowButton(BasicArrowButton.EAST);
         eastFacingArrowButtonToMoveSelectedItemForUpdate.setBounds(406,200,30,40);
         eastFacingArrowButtonToMoveSelectedItemForUpdate.setBackground(Color.CYAN);
+        eastFacingArrowButtonToMoveSelectedItemForUpdate.setEnabled(false);
         this.add(eastFacingArrowButtonToMoveSelectedItemForUpdate, BorderLayout.EAST);
 
 
@@ -104,6 +105,7 @@ public class AppFrame extends JFrame {
         eastFacingArrowForCompletedTasks = new BasicArrowButton(BasicArrowButton.EAST);
         eastFacingArrowForCompletedTasks.setBounds(400,700, 30, 40);
         eastFacingArrowForCompletedTasks.setBackground(Color.CYAN);
+        eastFacingArrowForCompletedTasks.setEnabled(false);
         this.add(eastFacingArrowForCompletedTasks, BorderLayout.EAST);
 
 
