@@ -16,6 +16,7 @@ public class AppFrame extends JFrame {
     private AddTaskPanel add_task_panel;
     private CommencedTasksPanel comenced_task_panel;
     private BasicArrowButton eastFacingArrowForCompletedTasks;
+    private CompletedTasksPanel completed_task_panel;
 
 
     public AppFrame(Model model) throws HeadlessException{
@@ -79,6 +80,14 @@ public class AppFrame extends JFrame {
         comenced_task_panel.setFocusable(false);
         pane.add(comenced_task_panel);
 
+
+        completed_task_panel = new CompletedTasksPanel("COMPLETED TASKS",0,1,model, this.width-300,
+                height-387,Color.black, true,17);
+        completed_task_panel.setLocation(450,560);
+        completed_task_panel.setFocusable(false);
+        pane.add(completed_task_panel);
+
+
         eastFacingArrowButtonToMoveSelectedItemForUpdate = new BasicArrowButton(BasicArrowButton.EAST);
         eastFacingArrowButtonToMoveSelectedItemForUpdate.setBounds(406,200,30,40);
         eastFacingArrowButtonToMoveSelectedItemForUpdate.setBackground(Color.CYAN);
@@ -103,6 +112,7 @@ public class AppFrame extends JFrame {
         moveCompletedTaskLabel.setBackground(Color.GREEN);
         moveCompletedTaskLabel.setForeground(Color.GREEN);
         this.add(moveCompletedTaskLabel);
+
     }
 
 }
