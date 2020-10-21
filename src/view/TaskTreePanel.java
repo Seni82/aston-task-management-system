@@ -1,7 +1,6 @@
 package view;
 import model.Model;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 
 
@@ -10,10 +9,10 @@ public class TaskTreePanel extends AbstractCommonComponents{
     public static final int MIN_WIDTH = 390;
     public static final int MIN_HEIGHT = 540;
     private final JTextField searchField;
-    private final JButton searchButton;
     private final JScrollPane scrollPane;
-    private JButton DeleteTaskButton;
+    private JButton deleteTaskButton;
     private JButton startTaskButton;
+    private JButton searchButton;
     private Model model;
 
     public TaskTreePanel(String taskTreePanelTitle,int x, int y, Model model, int width, int height, Color color, Boolean createBorder, int boundsHeight) {
@@ -23,11 +22,6 @@ public class TaskTreePanel extends AbstractCommonComponents{
         searchField = new JTextField("search task");
         searchField.setBounds(2, 20, 250, 30);
         this.add(searchField);
-
-        //Add a search button next to search field.
-        searchButton = new JButton("Search");
-        searchButton.setBounds(260, 18, 125, 33);
-        this.add(searchButton);
 
         //Adding Tree with JTree.
         JTree taskTree = new JTree();
@@ -39,7 +33,8 @@ public class TaskTreePanel extends AbstractCommonComponents{
 
         //Create button through inheritance by calling the method in my abstract class.
         createJButton(startTaskButton, "Start Task",40, 507,130,40,false, Color.BLACK,true);
-        createJButton(DeleteTaskButton, "Delete Task",220, 507,130,40,false, Color.BLACK,true);
+        createJButton(deleteTaskButton, "Delete Task",220, 507,130,40,false, Color.BLACK,true);
+        createJButton(searchButton, "Search", 258, 18, 125, 33, true, Color.black, true);
 
     }
 }
