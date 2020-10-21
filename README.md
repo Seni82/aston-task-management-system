@@ -1,3 +1,34 @@
+@alam.mohammed     -     Worked on 'Task field to add axterixs'    
+@Fathi-AI          -     Fix the Resizable and display issue (Aesthetics).
+@Sambath_Aston     -     Worked on the `'Project Name and Description field' `'for asterics'`
+@129123642         -     Worked on 'Sub-Task field to add axterixs'
+@GIsola            -     Date and time field, 
+                                ' Transfer data across to the tree', 
+                                ' Importance dropdown selection.'
+                                ' Ensure non duplicate.',
+                                ' Search function implemented.',
+                                ' Sort and display tasks based on priority.'
+
+
+All the pull request is now merged and the update is available for us to create our own branch. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Task Management System
 
 
