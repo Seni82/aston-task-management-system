@@ -5,7 +5,7 @@ import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 
-public class AppFrame<height> extends JFrame {
+public class AppFrame extends JFrame {
 
     private final int minimumWidth = AddTaskPanel.MIN_WIDTH+TaskTreePanel.MIN_WIDTH+5;
     private final int minimumHeight = Math.max(AddTaskPanel.MIN_HEIGHT,TaskTreePanel.MIN_HEIGHT);
@@ -119,26 +119,10 @@ public class AppFrame<height> extends JFrame {
         this.add(eastFacingArrowForCompletedTasks, BorderLayout.EAST);
 
 
-        JLabel moveCompletedTaskLabel = new JLabel("Move task.");
-        moveCompletedTaskLabel.setBounds(400, 750, 50, 15);
-        moveCompletedTaskLabel.setBackground(Color.GREEN);
-        moveCompletedTaskLabel.setForeground(Color.GREEN);
-        this.add(moveCompletedTaskLabel);
-
+        //JLabel moveCompletedTaskLabel = new JLabel("Move task.");
+        //moveCompletedTaskLabel.setBounds(400, 750, 50, 15);
+        //moveCompletedTaskLabel.setBackground(Color.GREEN);
+        //moveCompletedTaskLabel.setForeground(Color.GREEN);
+        //this.add(moveCompletedTaskLabel);
     }
-//    @Override
-//    public void paint(Graphics g) {
-    //     super.paintComponents(g);
-    //     if (this.getHeight() != height || this.getWidth() != width) {
-    //      height = this.getHeight();
-    //      width = this.getWidth();
-
-    //       final int rightColumnWidth = Math.max(AddTaskPanel.MIN_WIDTH, 5);
-    //      final int rightColumnStart = this.width - rightColumnWidth - 5;
-//        task_tree_panel.setSize(rightColumnStart - 150, 2 * height / 3 - 30);
-    //       add_task_panel.setLocation(rightColumnStart,5);
-    //      comenced_task_panel.setLocation(5,height-(height/3-5));
-//        completed_task_panel.setLocation(rightColumnStart,height-(height/3-5));
-    //     }
-    //  }
 }
