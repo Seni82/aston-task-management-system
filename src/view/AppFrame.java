@@ -57,7 +57,7 @@ public class AppFrame extends JFrame {
      */
     private void initFields(Model model){
         Container pane = this.getContentPane();
-        final int rightColumnWidth = Math.max(AddTaskPanel.MIN_WIDTH,5);
+        final int rightColumnWidth = this.getWidth()/2;
 
         final  int rightColumnStart = this.width - rightColumnWidth - 5;
         task_tree_panel  = new TaskTreePanel("TASK MANAGEMENT TREE",0,2,model,rightColumnStart-100,
