@@ -51,26 +51,26 @@ public class AppFrame extends JFrame {
 
         final  int rightColumnStart = this.width - rightColumnWidth - 5;
         task_tree_panel  = new TaskTreePanel("TASK MANAGEMENT TREE",0,2,model,rightColumnStart-100,
-                ((2*height)/3)-30,Color.black, true, 17);
+                ((2*height)/3)-30,Color.black, false, 15);
         task_tree_panel.setLocation(5, 5);
         task_tree_panel.setFocusable(false);
         pane.add(task_tree_panel);
 
         add_task_panel = new AddTaskPanel("ADD TASK",model, 0, 2, rightColumnWidth,
-                ((2*height)/3)-30, Color.blue, true, 16);
+                ((2*height)/3)-30, Color.blue, false, 15);
         add_task_panel.setLocation(rightColumnStart,5);
         add_task_panel.setFocusable(false);
         pane.add(add_task_panel);
 
         comenced_task_panel = new CommencedTasksPanel("COMMENCED TASKS",0,1,model, rightColumnStart-100,
-                (height/3)-10,Color.blue, true,17);
+                (height/3)-10,Color.blue, false,17);
         comenced_task_panel.setLocation(5,height-(height/3)-20);
         comenced_task_panel.setFocusable(false);
         pane.add(comenced_task_panel);
 
 
         completed_task_panel = new CompletedTasksPanel("COMPLETED TASKS",0,1,model, rightColumnWidth,
-                (height/3)-10,Color.black, true,17);
+                (height/3)-10,Color.black, false,17);
         completed_task_panel.setLocation(rightColumnStart,2*height/3-20);
         completed_task_panel.setFocusable(false);
         pane.add(completed_task_panel);
@@ -107,5 +107,8 @@ public class AppFrame extends JFrame {
         eastFacingArrowForCompletedTasks.setBackground(Color.CYAN);
         eastFacingArrowForCompletedTasks.setEnabled(false);
         this.add(eastFacingArrowForCompletedTasks, BorderLayout.EAST);
+
+
+
     }
 }
