@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class TaskTreePanel extends AbstractCommonComponents{
+public class TaskTreePanel extends AbstractCommonComponents {
 
-    public static final int MIN_WIDTH = 390;
-    public static final int MIN_HEIGHT = 540;
+    public static final int MIN_WIDTH = 500;
+    public static final int MIN_HEIGHT = 390;
     private JTextField searchField;
     private final JScrollPane scrollPane;
     private JButton deleteTaskButton;
@@ -15,11 +15,14 @@ public class TaskTreePanel extends AbstractCommonComponents{
     private JButton searchButton;
     private Model model;
 
-    public TaskTreePanel(String taskTreePanelTitle,int x, int y, Model model, int width, int height, Color color, Boolean createBorder, int boundsHeight) {
-        super(taskTreePanelTitle,model, x, y, width, height, color, createBorder, boundsHeight);
+    public TaskTreePanel(String taskTreePanelTitle, int x, int y, Model model, int width, int height, Color color, Boolean createBorder, int boundsHeight) {
+        super(taskTreePanelTitle, model, x, y, width, height, color, createBorder, boundsHeight);
+
+
 
         //Add a search field on the task lists.
-        createJTextField(searchField, 2 , 20, 250, 30);
+        createJTextField(searchField, 2 , 20, this.getWidth()-150, 30);
+
 
         //Adding Tree with JTree.
         JTree taskTree = new JTree();
@@ -30,9 +33,10 @@ public class TaskTreePanel extends AbstractCommonComponents{
         this.add(scrollPane);
 
 
-        //Create button through inheritance by calling the method in my abstract class.
-        createJButton(startTaskButton, "Start Task",40, 507,130,40,false, Color.BLACK,true);
-        createJButton(deleteTaskButton, "Delete Task",220, 507,130,40,false, Color.BLACK,true);
-        createJButton(searchButton, "Search", 258, 18, 125, 33, true, Color.black, true);
+        createJButton(startTaskButton, "Start Task", this.getWidth()/3-50, height-42, 100, 40, false, Color.BLACK, true);
+        createJButton(DeleteTaskButton, "Delete Task", 2*this.getWidth()/3-50, height-42, 100, 40, false, Color.BLACK, true);
+        createJButton(searchButton, "Search", searchField.getWidth()+10, 18, 125, 33, true, Color.black, true);
+
     }
+
 }

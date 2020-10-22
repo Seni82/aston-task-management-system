@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class CompletedTasksPanel extends AbstractCommonComponents{
 
-    public static final int MIN_WIDTH = 400;
+    public static final int MIN_WIDTH = 480;
     public static final int MIN_HEIGHT = 200;
 
 
