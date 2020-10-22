@@ -34,16 +34,6 @@ public class AppFrame extends JFrame {
      */
     private void setDefaultBehaviour(){
         getContentPane().setLayout(null);
-        //     this.setMinimumSize(new Dimension(minimumWidth, minimumHeight));
-
-        //     this.setMaximumSize(new Dimension(screenSize.width - 1, screenSize.height - 1));
-
-        //     if (height > screenSize.height) {
-        //         height = screenSize.height;
-        //     }
-        //     if (width > screenSize.width) {
-        //         width = screenSize.width;
-        //     }
         this.setLocation((screenSize.width ) / 8,
                 (screenSize.height) / 8);
         this.setSize(width, height);

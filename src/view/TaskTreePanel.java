@@ -21,7 +21,7 @@ public class TaskTreePanel extends AbstractCommonComponents {
 
 
         //Add a search field on the task lists.
-        createJTextField(searchField, 2 , 20, this.getWidth()-150, 30);
+        createJTextField(searchField, 2 , 20, this.getWidth()-137, 30);
 
 
         //Adding Tree with JTree.
@@ -35,7 +35,7 @@ public class TaskTreePanel extends AbstractCommonComponents {
 
         createJButton(startTaskButton, "Start Task", this.getWidth()/3-50, height-42, 100, 40, false, Color.BLACK, true);
         createJButton(deleteTaskButton, "Delete Task", 2*this.getWidth()/3-50, height-42, 100, 40, false, Color.BLACK, true);
-        createJButton(searchButton, "Search", 300, 18, 125, 33, true, Color.black, true);
+        createJButton(searchButton, "Search", this.getWidth()-130, 18, 125, 33, true, Color.black, true);
  //       searchField.getWidth()+10
     }
 

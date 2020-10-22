@@ -53,65 +53,65 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
         //Project Name and field
         createJLabel(projectName, "Project Name:",5 , 20, FIELD_START - 2, 15, color);
-        createJTextField(projectNameEntry, FIELD_START , 18, this.getWidth()-120, 20);
+        createJTextField(projectNameEntry, FIELD_START , 18, 3*(this.getWidth()-120)/4, 20);
 
 
         //Description and field name.
-        createJLabel(description, "Description:",5 , 40, FIELD_START - 2, 15, color);
-        createJTextField(descriptionEntry, FIELD_START , 38, this.getWidth()-120, 20);
+        createJLabel(description, "Description:",5 , 45, FIELD_START - 2, 15, color);
+        createJTextField(descriptionEntry, FIELD_START , 43, this.getWidth()-120, 20);
       
         //Task Name Label and field name
-        createJLabel(taskName, "Task Name",5 , 60, FIELD_START - 2, 15, color);
-        createJTextField(taskNameEntry, FIELD_START , 58, this.getWidth()-120, 20);
+        createJLabel(taskName, "Task Name",5 , 70, FIELD_START - 2, 15, color);
+        createJTextField(taskNameEntry, FIELD_START , 68, 3*(this.getWidth()-120)/4, 20);
 
        
         //sub-task 1 (Needs to be made mandatory)
-        createJLabel(subTask1, "Sub Task 1:",5, 80, FIELD_START - 2, 15, color);
-        createJTextField(subTask1NameEntry, FIELD_START , 78, this.getWidth()-120, 20);
+        createJLabel(subTask1, "Sub Task 1:",5, 95, FIELD_START - 2, 15, color);
+        createJTextField(subTask1NameEntry, FIELD_START , 93, 3*(this.getWidth()-120)/4, 20);
 
         //sub-task 2 (optional)
-        createJLabel(subTask2, "Sub Task 2:",5 , 100, FIELD_START - 2, 15, color);
-        createJTextField(subTask2NameEntry, FIELD_START , 98, this.getWidth()-120, 20);
+        createJLabel(subTask2, "Sub Task 2:",5 , 120, FIELD_START - 2, 15, color);
+        createJTextField(subTask2NameEntry, FIELD_START , 118, 3*(this.getWidth()-120)/4, 20);
 
         //sub-task 3 (optional)
-        createJLabel(subTask3, "Sub Task 3:",5 , 120, FIELD_START - 2, 15, color);
-        createJTextField(subTask3NameEntry, FIELD_START , 118, this.getWidth()-120, 20);
+        createJLabel(subTask3, "Sub Task 3:",5 , 145, FIELD_START - 2, 15, color);
+        createJTextField(subTask3NameEntry, FIELD_START , 143, 3*(this.getWidth()-120)/4, 20);
 
         //sub-task 4 (optional)
-        createJLabel(subTask4, "Sub Task 4:",5 , 140, FIELD_START - 2, 15, color);
-        createJTextField(subTask4NameEntry, FIELD_START , 138, this.getWidth()-120, 20);
+        createJLabel(subTask4, "Sub Task 4:",5 , 170, FIELD_START - 2, 15, color);
+        createJTextField(subTask4NameEntry, FIELD_START , 168, 3*(this.getWidth()-120)/4, 20);
 
         //sub-task 5 (optional)
-        createJLabel(subTask5, "Sub Task 5:",5 , 160, FIELD_START - 2, 15, color);
-        createJTextField(subTask5NameEntry, FIELD_START , 158, this.getWidth()-120, 20);
+        createJLabel(subTask5, "Sub Task 5:",5 , 195, FIELD_START - 2, 15, color);
+        createJTextField(subTask5NameEntry, FIELD_START , 193, 3*(this.getWidth()-120)/4, 20);
 
 
         //Task due date field
-        createJLabel(taskDueDate, "Task Due Date:",5, 180, FIELD_START - 2, 15, color);
-        createJTextField(taskDueDateEntry, FIELD_START, 178, (this.getWidth()-220)/2, 20);
+        createJLabel(taskDueDate, "Task Due Date:",5, 220, FIELD_START - 2, 15, color);
+        createJTextField(taskDueDateEntry, FIELD_START, 218, (this.getWidth()-220)/2, 20);
 
         //Task due time field
-        createJLabel(taskDueTime, "Task Due Time:",100+(this.getWidth()-220)/2, 180, FIELD_START - 2, 15, color);
-        createJTextField(taskDueTimeEntry, 200+(this.getWidth()-220)/2, 178, (this.getWidth()-220)/2, 20);
+        createJLabel(taskDueTime, "Due Time:",138+(this.getWidth()-220)/2, 220, FIELD_START - 27, 15, color);
+        createJTextField(taskDueTimeEntry, 200+(this.getWidth()-220)/2, 218, (this.getWidth()-220)/2, 20);
 
         //Importance field and combo box.
-        createJLabel(taskImportance, "Importance:",5, 210, FIELD_START - 2, 15, color);
+        createJLabel(taskImportance, "Importance:",5, 250, FIELD_START - 2, 15, color);
         importanceDropDownComponent = new JComboBox(model.getImportanceModel());
-        importanceDropDownComponent.setBounds(FIELD_START, 208, (this.getWidth()-120)/3, 20);
+        importanceDropDownComponent.setBounds(FIELD_START, 248, (this.getWidth()-120)/3, 20);
         this.add(importanceDropDownComponent);
 
         createJLabel(lowAndMediumPriorityRangeDescription, "[0 - 3 : LOW]        " +
                         "[4 - 6 : MEDIUM]",
-                100+(this.getWidth()-120)/3, 200, 2*(this.getWidth()-120)/3, 15, color);
+                110+(this.getWidth()-120)/3, 248, 2*(this.getWidth()-120)/3, 15, color);
 
         createJLabel(highAndHighestPriotityRangeDescription, "[7 - 9 : HIGH]        " +
                         "[10 : HIGHEST]",
-                100+(this.getWidth()-120)/3, 220, 2*(this.getWidth()-120)/3, 15, color);
+                110+(this.getWidth()-120)/3, 263, 2*(this.getWidth()-120)/3, 15, color);
 
 
         //Estimated Duration and field name.
-        createJLabel(estimatedTaskDuration, "Est. Duration:",5, 240, FIELD_START-2, 15, color);
-        createJTextField(estimatedTaskDurationField, FIELD_START, 238, this.getWidth()-120, 20);
+        createJLabel(estimatedTaskDuration, "Est. Duration:",5, 283, FIELD_START-2, 15, color);
+        createJTextField(estimatedTaskDurationField, FIELD_START, 281, (this.getWidth()-220)/2, 20);
 
         //create buttons
         createJButton(addTaskButton,"Add Task", this.getWidth()/4-50, height-42, 100, 40, true,Color.blue,true);
