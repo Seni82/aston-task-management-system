@@ -111,7 +111,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
         //Estimated Duration and field name.
         createJLabel(estimatedTaskDuration, "Est. Duration:",5, 283, FIELD_START-2, 15, color);
-        createJTextField(estimatedTaskDurationField, FIELD_START, 281, (this.getWidth()-220)/2, 20);
+        createJTextField(estimatedTaskDurationField, FIELD_START, 281, 50+(this.getWidth()-220)/2, 20);
 
         //create buttons
         createJButton(addTaskButton,"Add Task", this.getWidth()/4-50, height-42, 100, 40, true,Color.blue,true);
