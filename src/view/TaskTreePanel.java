@@ -34,9 +34,9 @@ public class TaskTreePanel extends AbstractCommonComponents {
 
 
         createJButton(startTaskButton, "Start Task", this.getWidth()/3-50, height-42, 100, 40, false, Color.BLACK, true);
-        createJButton(DeleteTaskButton, "Delete Task", 2*this.getWidth()/3-50, height-42, 100, 40, false, Color.BLACK, true);
-        createJButton(searchButton, "Search", searchField.getWidth()+10, 18, 125, 33, true, Color.black, true);
-
+        createJButton(deleteTaskButton, "Delete Task", 2*this.getWidth()/3-50, height-42, 100, 40, false, Color.BLACK, true);
+        createJButton(searchButton, "Search", 300, 18, 125, 33, true, Color.black, true);
+ //       searchField.getWidth()+10
     }
 
 }

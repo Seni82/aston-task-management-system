@@ -119,10 +119,6 @@ public class AppFrame extends JFrame {
         this.add(eastFacingArrowForCompletedTasks, BorderLayout.EAST);
 
 
-        //JLabel moveCompletedTaskLabel = new JLabel("Move task.");
-        //moveCompletedTaskLabel.setBounds(400, 750, 50, 15);
-        //moveCompletedTaskLabel.setBackground(Color.GREEN);
-        //moveCompletedTaskLabel.setForeground(Color.GREEN);
-        //this.add(moveCompletedTaskLabel);
+
     }
 }
