@@ -57,7 +57,8 @@ public class AppFrame extends JFrame {
         pane.add(task_tree_panel);
 
         add_task_panel = new AddTaskPanel("ADD TASK",0, 2, rightColumnWidth,
-                ((2*height)/3)-30, Color.blue, true, 16, model);
+                ((2*height)/3)-30, Color.blue, true, 16, task_tree_panel );
+
         add_task_panel.setLocation(rightColumnStart,5);
         add_task_panel.setFocusable(false);
         pane.add(add_task_panel);

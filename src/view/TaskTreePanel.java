@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
-
+import model.AllTasks;
 
 public class TaskTreePanel extends AbstractCommonComponents {
 
@@ -17,19 +17,23 @@ public class TaskTreePanel extends AbstractCommonComponents {
     private JButton searchButton;
     private AddTaskModel model;
     private JTree taskTree;
-
+    private DefaultMutableTreeNode rootNode;
 
     public TaskTreePanel(String taskTreePanelTitle, int x, int y, int width, int height, Color color, Boolean createBorder, int boundsHeight, AddTaskModel model) {
         super(taskTreePanelTitle, x, y, width, height, color, createBorder, boundsHeight);
         this.model = model;
-
 
         //Add a search field on the task lists.
         searchField = new JTextField();
         searchField.setBounds(2, 20, this.getWidth() - 137, 30);
         this.add(searchField);
 
-        taskTree = new JTree(model.getTaskTreeModel());
+        rootNode = new DefaultMutableTreeNode("Projects");
+        for (int i = 0; i < AllTasks.tasks.size(); i++) {
+            DefaultMutableTreeNode projectNode = new DefaultMutableTreeNode(AllTasks.tasks.get(i).getProjectName());
+            rootNode.add(projectNode);
+        }
+        taskTree = new JTree(rootNode);
         taskTree.setShowsRootHandles(true);
         scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.getViewport().setView(taskTree);
@@ -57,7 +61,23 @@ public class TaskTreePanel extends AbstractCommonComponents {
         searchButton.setBackground(Color.BLACK);
         searchButton.setBackground(Color.BLACK);
         this.add(searchButton);
+    }
 
+    public void updateTree(){
+
+        rootNode.removeAllChildren();
+        for (int i = 0; i < AllTasks.tasks.size(); i++) {
+            DefaultMutableTreeNode projectNode = new DefaultMutableTreeNode(AllTasks.tasks.get(i).getProjectName());
+            String[] subTasks = AllTasks.tasks.get(i).getSubTasks();
+            for(int j = 0; j < 5; j++){
+                DefaultMutableTreeNode subTaskNode = new DefaultMutableTreeNode(subTasks[j]);
+                projectNode.add(subTaskNode);
+            }
+            rootNode.add(projectNode);
+        }
+
+        DefaultTreeModel model = (DefaultTreeModel)taskTree.getModel();
+        model.reload(rootNode);
 
     }
 

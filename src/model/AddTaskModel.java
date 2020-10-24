@@ -85,11 +85,8 @@ public class AddTaskModel {
 
     }
 
-
-
     public DefaultTreeModel getTaskTreeModel() {
-        return treeModel;}
-
-
+        return treeModel;
+    }
 
 }

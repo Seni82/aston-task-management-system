@@ -1,5 +1,8 @@
 package view;
-import model.AddTaskModel;
+import model.TaskModel;
+import model.Model;
+import model.AllTasks;
+import view.TaskTreePanel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
@@ -9,7 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Calendar;
-
 
 /**
  *
@@ -69,15 +71,12 @@ public class AddTaskPanel extends AbstractCommonComponents {
     private static int minutesValue;
     private static int selectedImportanceNumberValue;
     private static String taskDurationValue;
-    private AddTaskModel model;
-
-
-
+    private TaskTreePanel treePanel;
     //Need AddTaskData model here to use to call the addTask after the event
-    public AddTaskPanel(String addTaskPanelTitle, int x, int y, int width, int height, Color color, Boolean createBorder, int boundsHeight, AddTaskModel model) {
+    public AddTaskPanel(String addTaskPanelTitle, int x, int y, int width, int height, Color color, Boolean createBorder, int boundsHeight, TaskTreePanel treePanel) {
         super(addTaskPanelTitle, x, y, width, height, color, createBorder, boundsHeight);
-        this.model = model;
 
+        this.treePanel = treePanel;
         //Project Name and field
         createJLabel(projectName, "Project Name:", 5, 20, FIELD_START - 2, 15, color);
         projectNameEntry = new JTextField();
@@ -95,7 +94,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
         addTaskButton.setBounds(this.getWidth()/4-50, height-42, 100, 40);
         addTaskButton.setEnabled(true);
         addTaskButton.setBackground(Color.BLUE);
-        addTaskButton.setForeground(Color.BLUE);
+        addTaskButton.setForeground(Color.WHITE);
         addTaskButton.addActionListener(this::addTaskEvent);
         this.add(addTaskButton);
 
@@ -175,7 +174,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
         //Importance field and combo box.
         createJLabel(taskImportance, "Importance:",5, 255, FIELD_START - 2, 15, color);
-        importanceDropDownComponent = new JComboBox<>(AddTaskModel.IMPORTANCE_MODEL);
+        importanceDropDownComponent = new JComboBox<>(Model.IMPORTANCE_MODEL);
         importanceDropDownComponent.setBounds(FIELD_START, 255, (this.getWidth()-120)/3, 20);
         this.add(importanceDropDownComponent);
 
@@ -206,20 +205,23 @@ public class AddTaskPanel extends AbstractCommonComponents {
         subTask4Value = subTask4NameEntry.getText();
         subTask5Value = subTask5NameEntry.getText();
 
-
         date = dateModel.getValue();
         hourValue = (Integer)this.hour.getValue();
         minutesValue = (Integer)this.minutes.getValue();
         selectedImportanceNumberValue = (Integer)importanceDropDownComponent.getSelectedItem();
         taskDurationValue = estimatedTaskDurationField.getText();
 
-
-        model.addTasks(projectNameValue,projectDescriptionValue,taskNameValue,
+        TaskModel tempTask = new TaskModel(projectNameValue,projectDescriptionValue,taskNameValue,
                 subTask1Value, subTask2Value, subTask3Value, subTask4Value,
                 subTask5Value, date, hourValue,
                 minutesValue, selectedImportanceNumberValue, taskDurationValue);
 
-         clearField();
+        AllTasks.tasks.add(tempTask);
+
+        treePanel.updateTree();
+
+
+        clearField();
     }
 
 
