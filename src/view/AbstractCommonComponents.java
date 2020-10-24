@@ -22,6 +22,7 @@ public abstract class AbstractCommonComponents extends JPanel {
         this.add(panelLabel);
     }
 
+
     protected void createJButton(JButton buttonName, String title, int x, int y, int width, int height, Boolean buttonEnabled, Color color, Boolean setButtonColor)
     {
         buttonName = new JButton(title);
@@ -40,9 +41,14 @@ public abstract class AbstractCommonComponents extends JPanel {
         this.add(labelName);
     }
 
-    protected void createJTextField(JTextField textFieldName, int FIELD_START, int y, int width, int height){
+    protected void createJTextField(JTextField textFieldName, int FIELD_START, int y, int width, int height, Boolean requiredField){
         textFieldName = new JTextField();
         textFieldName.setBounds(FIELD_START, y, width, height);
         this.add(textFieldName);
+        //if(requiredField){
+            //if (textFieldName.getText().equals(" ")) {
+                //JOptionPane.showMessageDialog(null, "Missing field");
+               //jLabel20.setText("*");
+            //}}
     }
 }
