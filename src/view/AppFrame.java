@@ -1,7 +1,6 @@
 package view;
-import model.Model;
+import model.AddTaskModel;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 
@@ -21,12 +20,13 @@ public class AppFrame extends JFrame {
     private JLabel completeTaskLabel;
 
 
-    public AppFrame(Model model) throws HeadlessException{
+
+    public AppFrame(AddTaskModel model) throws HeadlessException{
         super("TASK MANAGEMENT SYSTEM.");
         setDefaultBehaviour();
         initFields(model);
         this.setVisible(true);
-    }
+     }
 
 
     /**
@@ -45,32 +45,32 @@ public class AppFrame extends JFrame {
     /**
      * This method is to add panels onto the frame.
      */
-    private void initFields(Model model){
+    private void initFields(AddTaskModel model){
         Container pane = this.getContentPane();
         final int rightColumnWidth = this.getWidth()/2;
 
         final  int rightColumnStart = this.width - rightColumnWidth - 5;
-        task_tree_panel  = new TaskTreePanel("TASK MANAGEMENT TREE",0,2,model,rightColumnStart-100,
-                ((2*height)/3)-30,Color.black, true, 17);
+        task_tree_panel  = new TaskTreePanel("TASK MANAGEMENT TREE",0,2,rightColumnStart-100,
+                ((2*height)/3)-30,Color.black, true, 17, model);
         task_tree_panel.setLocation(5, 5);
         task_tree_panel.setFocusable(false);
         pane.add(task_tree_panel);
 
-        add_task_panel = new AddTaskPanel("ADD TASK",model, 0, 2, rightColumnWidth,
-                ((2*height)/3)-30, Color.blue, true, 16);
+        add_task_panel = new AddTaskPanel("ADD TASK",0, 2, rightColumnWidth,
+                ((2*height)/3)-30, Color.blue, true, 16, model);
         add_task_panel.setLocation(rightColumnStart,5);
         add_task_panel.setFocusable(false);
         pane.add(add_task_panel);
 
-        comenced_task_panel = new CommencedTasksPanel("COMMENCED TASKS",0,1,model, rightColumnStart-100,
-                (height/3)-10,Color.blue, true,17);
+        comenced_task_panel = new CommencedTasksPanel("COMMENCED TASKS",0,1,rightColumnStart-100,
+                (height/3)-10,Color.blue, true,17, model);
         comenced_task_panel.setLocation(5,height-(height/3)-20);
         comenced_task_panel.setFocusable(false);
         pane.add(comenced_task_panel);
 
 
-        completed_task_panel = new CompletedTasksPanel("COMPLETED TASKS",0,1,model, rightColumnWidth,
-                (height/3)-10,Color.black, true,17);
+        completed_task_panel = new CompletedTasksPanel("COMPLETED TASKS",0,1, rightColumnWidth,
+                (height/3)-10,Color.black, true,17, model);
         completed_task_panel.setLocation(rightColumnStart,2*height/3-20);
         completed_task_panel.setFocusable(false);
         pane.add(completed_task_panel);
