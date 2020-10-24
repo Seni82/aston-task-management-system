@@ -3,6 +3,7 @@ package model;
 
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
@@ -11,19 +12,21 @@ import java.util.Vector;
 
 public class TaskTreeModel implements TreeModel {
 
-    private AddTaskModel rootProjectName;
 
-    public TaskTreeModel(){}
+    private DefaultMutableTreeNode root;
 
-     private final ArrayList<TreeModelListener> treeModelListeners = new ArrayList<>();
 
-    public TaskTreeModel(AddTaskModel rootProjectName) {
-        this.rootProjectName = rootProjectName;
+    private ArrayList<TreeModelListener> treeModelListeners;
+
+    public  TaskTreeModel()
+    {
+        treeModelListeners = new ArrayList<TreeModelListener>();
+        root = new DefaultMutableTreeNode("ROOT");
     }
 
     @Override
     public Object getRoot() {
-        return rootProjectName;
+        return root;
     }
 
     @Override
@@ -62,17 +65,17 @@ public class TaskTreeModel implements TreeModel {
     }
 
 
-    public void fireTreeNodeAdded(TreeNode addedRegion) {
+    public void fireTreeNodeAdded(TreeNode addedTask) {
         ArrayList<TreeNode> path = new ArrayList<>();
-        path.add(addedRegion);
-        for (TreeNode parent = addedRegion.getParent();
-             parent != rootProjectName;
+        path.add((TreeNode) root);
+        for (TreeNode parent = addedTask.getParent();
+             parent != (TreeNode) root;
              parent = parent.getParent()) {
             path.add(1,parent);
         }
-        final int[] indicies = {addedRegion.getParent().getIndex(addedRegion)};
+        final int[] indicies = {addedTask.getParent().getIndex(addedTask)};
         TreeModelEvent e = new TreeModelEvent(this, path.toArray(), indicies,
-                new Object[] {addedRegion});
+                new Object[] {addedTask});
         for (TreeModelListener tml : treeModelListeners) {
             tml.treeStructureChanged(e);
         }

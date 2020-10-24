@@ -12,7 +12,6 @@ public abstract class AbstractCommonComponents extends JPanel {
     private JButton searchButton;
     private JButton deleteTaskButton;
 
-    //public AbstractCommonComponents(){}
 
     //common functionality between panel is added here
     public AbstractCommonComponents(String panelTitle , int x, int y, int width, int height, Color color, Boolean createTitleBoder, int boundsHeight)
