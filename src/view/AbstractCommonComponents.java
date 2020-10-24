@@ -1,16 +1,22 @@
 package view;
-import model.Model;
+import model.AddTaskModel;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
 public abstract class AbstractCommonComponents extends JPanel {
-    protected final Model model;
+    private JButton clearTaskButton;
+    private JButton taskUpdateButton;
+    private JButton addTaskButton;
+    private JButton startTaskButton;
+    private JButton searchButton;
+    private JButton deleteTaskButton;
+
+    //public AbstractCommonComponents(){}
 
     //common functionality between panel is added here
-    public AbstractCommonComponents(String panelTitle , Model model,int x, int y, int width, int height, Color color, Boolean createTitleBoder, int boundsHeight)
+    public AbstractCommonComponents(String panelTitle , int x, int y, int width, int height, Color color, Boolean createTitleBoder, int boundsHeight)
     {
-        this.model = model;
         this.setLayout(null);
         this.setSize(width, height);
         this.setBorder(BorderFactory.createLineBorder(color));
@@ -22,16 +28,6 @@ public abstract class AbstractCommonComponents extends JPanel {
         this.add(panelLabel);
     }
 
-
-    protected void createJButton(JButton buttonName, String title, int x, int y, int width, int height, Boolean buttonEnabled, Color color, Boolean setButtonColor)
-    {
-        buttonName = new JButton(title);
-        buttonName.setBounds(x, y, width, height);
-        buttonName.setEnabled(buttonEnabled);
-        if(setButtonColor == true){buttonName.setBackground(color);buttonName.setForeground(color);}
-        this.add(buttonName);
-    }
-
     protected void createJLabel(JLabel labelName, String title,int x , int y, int width, int height, Color color){
         labelName = new JLabel(title);
         labelName.setBounds(x, y, width, height);
@@ -41,14 +37,4 @@ public abstract class AbstractCommonComponents extends JPanel {
         this.add(labelName);
     }
 
-    protected void createJTextField(JTextField textFieldName, int FIELD_START, int y, int width, int height, Boolean requiredField){
-        textFieldName = new JTextField();
-        textFieldName.setBounds(FIELD_START, y, width, height);
-        this.add(textFieldName);
-        //if(requiredField){
-            //if (textFieldName.getText().equals(" ")) {
-                //JOptionPane.showMessageDialog(null, "Missing field");
-               //jLabel20.setText("*");
-            //}}
-    }
 }

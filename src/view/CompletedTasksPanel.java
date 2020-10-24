@@ -1,6 +1,6 @@
 package view;
 
-import model.Model;
+import model.AddTaskModel;
 
 import java.awt.*;
 
@@ -10,7 +10,7 @@ public class CompletedTasksPanel extends AbstractCommonComponents{
     public static final int MIN_HEIGHT = 200;
 
 
-    public CompletedTasksPanel(String completedTaskPanelTitle, int x, int y, Model model, int width, int height, Color color, Boolean createBorder, int boundsHeight){
-        super(completedTaskPanelTitle,model,x,y,width, height,color,createBorder,boundsHeight);
+    public CompletedTasksPanel(String completedTaskPanelTitle, int x, int y, int width, int height, Color color, Boolean createBorder, int boundsHeight, AddTaskModel model){
+        super(completedTaskPanelTitle,x,y,width, height,color,createBorder,boundsHeight);
     }
 }
