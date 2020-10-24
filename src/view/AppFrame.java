@@ -1,9 +1,12 @@
 package view;
 import model.Model;
+import model.TaskRepository;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
+import java.text.DateFormat;
 
 public class AppFrame extends JFrame {
 
@@ -49,18 +52,21 @@ public class AppFrame extends JFrame {
         Container pane = this.getContentPane();
         final int rightColumnWidth = this.getWidth()/2;
 
+        TaskRepository taskRepository = new TaskRepository();
+
         final  int rightColumnStart = this.width - rightColumnWidth - 5;
         task_tree_panel  = new TaskTreePanel("TASK MANAGEMENT TREE",0,2,model,rightColumnStart-100,
-                ((2*height)/3)-30,Color.black, false, 15);
+                ((2*height)/3)-30,Color.black, false, 15, taskRepository);
         task_tree_panel.setLocation(5, 5);
         task_tree_panel.setFocusable(false);
         pane.add(task_tree_panel);
 
-        add_task_panel = new AddTaskPanel("ADD TASK",model, 0, 2, rightColumnWidth,
-                ((2*height)/3)-30, Color.blue, false, 15);
+        add_task_panel = new AddTaskPanel("ADD TASK", model, 0, 2, rightColumnWidth,
+                ((2 * height) / 3) - 30, Color.blue, false, 15, task_tree_panel, taskRepository, DateFormat.getDateInstance(), this);
         add_task_panel.setLocation(rightColumnStart,5);
         add_task_panel.setFocusable(false);
         pane.add(add_task_panel);
+        task_tree_panel.setAddTaskPanel(add_task_panel);
 
         comenced_task_panel = new CommencedTasksPanel("COMMENCED TASKS",0,1,model, rightColumnStart-100,
                 (height/3)-10,Color.blue, false,17);
@@ -69,8 +75,13 @@ public class AppFrame extends JFrame {
         pane.add(comenced_task_panel);
 
 
-        completed_task_panel = new CompletedTasksPanel("COMPLETED TASKS",0,1,model, rightColumnWidth,
-                (height/3)-10,Color.black, false,17);
+        completed_task_panel = new CompletedTasksPanel("COMPLETED TASKS", 0, 1, model, rightColumnWidth,
+                (height / 3) - 10, Color.black, false, 17) {
+            @Override
+            protected void taskTree(DefaultMutableTreeNode node) {
+
+            }
+        };
         completed_task_panel.setLocation(rightColumnStart,2*height/3-20);
         completed_task_panel.setFocusable(false);
         pane.add(completed_task_panel);

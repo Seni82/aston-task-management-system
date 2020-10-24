@@ -4,7 +4,7 @@ import model.Model;
 
 import java.awt.*;
 
-public class CompletedTasksPanel extends AbstractCommonComponents{
+public abstract class CompletedTasksPanel extends AbstractCommonComponents{
 
     public static final int MIN_WIDTH = 480;
     public static final int MIN_HEIGHT = 200;

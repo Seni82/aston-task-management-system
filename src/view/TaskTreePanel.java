@@ -1,6 +1,9 @@
 package view;
 import model.Model;
+import model.Task;
+import model.TaskRepository;
 import javax.swing.*;
+import javax.swing.tree.*;
 import java.awt.*;
 
 
@@ -14,8 +17,14 @@ public class TaskTreePanel extends AbstractCommonComponents {
     private JButton startTaskButton;
     private JButton searchButton;
     private Model model;
+    private AddTaskPanel addTaskPanel;
 
-    public TaskTreePanel(String taskTreePanelTitle, int x, int y, Model model, int width, int height, Color color, Boolean createBorder, int boundsHeight) {
+    public DefaultMutableTreeNode rootNode;
+    public DefaultTreeModel treeModel;
+
+    public TaskTreePanel(String taskTreePanelTitle, int x, int y, Model model, int width, int height, Color color,
+                         Boolean createBorder, int boundsHeight,
+                         TaskRepository taskRepository) {
         super(taskTreePanelTitle, model, x, y, width, height, color, createBorder, boundsHeight);
 
 
@@ -25,7 +34,10 @@ public class TaskTreePanel extends AbstractCommonComponents {
 
 
         //Adding Tree with JTree.
-        JTree taskTree = new JTree();
+
+        rootNode = new DefaultMutableTreeNode();
+        treeModel = new DefaultTreeModel(rootNode);
+        JTree taskTree = new JTree(treeModel);
         taskTree.setRootVisible(false);
         scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.getViewport().setView(taskTree);
@@ -33,10 +45,51 @@ public class TaskTreePanel extends AbstractCommonComponents {
         this.add(scrollPane);
 
 
-        createJButton(startTaskButton, "Start Task", this.getWidth()/3-50, height-42, 100, 40, false, Color.BLACK, true);
+
+
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Outstanding Task Lists");
+        JTree tree;
+        tree = new JTree(treeModel);
+        tree.setRootVisible(false);
+
+
+        taskTree.getSelectionModel().addTreeSelectionListener((event)-> {
+            System.out.println(event.getPath());
+            DefaultMutableTreeNode value = (DefaultMutableTreeNode) event.getPath().getPath()[1];
+            addTaskPanel.showTask((Task) value.getUserObject());
+        });
+
+
+
+        startTaskButton = createJButton(null, "Start Task", this.getWidth()/3-50, height-42, 100, 40, false, Color.BLACK, true);
         createJButton(deleteTaskButton, "Delete Task", 2*this.getWidth()/3-50, height-42, 100, 40, false, Color.BLACK, true);
         createJButton(searchButton, "Search", this.getWidth()-130, 18, 125, 33, true, Color.black, true);
+
+        startTaskButton.addActionListener((e)-> {
+            String taskName = (String) taskTree.getSelectionPath().getPath()[1];
+            Task task = taskRepository.getByName(taskName);
+
+            task.setStarted(true);
+        });
  //       searchField.getWidth()+10
     }
 
+    public void setAddTaskPanel(AddTaskPanel addTaskPanel) {
+        this.addTaskPanel = addTaskPanel;
+    }
+
+    public static void add(MutableTreeNode taskRoot) {
+    }
+
+    public void addTreeNode(MutableTreeNode treeNode)
+    {
+        rootNode.add(treeNode);
+        treeModel.reload();
+    }
+
+    @Override
+    protected void taskTree(DefaultMutableTreeNode node) {
+
+
+    }
 }

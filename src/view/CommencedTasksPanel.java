@@ -2,6 +2,7 @@ package view;
 
 import model.Model;
 
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 
 public class CommencedTasksPanel extends AbstractCommonComponents{
@@ -13,4 +14,8 @@ public class CommencedTasksPanel extends AbstractCommonComponents{
         super(commencedTaskPanelTitle,model,x,y,width, height,color,createBorder,boundsHeight);
     }
 
+    @Override
+    protected void taskTree(DefaultMutableTreeNode node) {
+
+    }
 }
