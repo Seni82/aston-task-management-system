@@ -7,7 +7,6 @@ import java.util.Calendar;
 
 public class AddTaskModel {
 
-    public static final Integer IMPORTANCE_MODEL[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     private String projectName;
     private String projectDescription;
     private String taskName;
@@ -27,39 +26,52 @@ public class AddTaskModel {
     DefaultTreeModel dfModel;
     DefaultMutableTreeNode root;
 
+   private TaskTreeModel taskTreeModel;
 
-    /*
+    public static final Integer IMPORTANCE_MODEL[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+
     public AddTaskModel()
     {
-        projName = new DefaultMutableTreeNode("Project Name: " );//+this.projectName);
-
-        DefaultMutableTreeNode projDescription = new DefaultMutableTreeNode("Project Description: " +this.projectDescription);
-        DefaultMutableTreeNode myTaskName = new DefaultMutableTreeNode("Task Name: " +this.taskName);
-        DefaultMutableTreeNode subTask1 = new DefaultMutableTreeNode("Sub Task 1: " +this.subTask1Value);
-        DefaultMutableTreeNode subTask2 = new DefaultMutableTreeNode("Sub Task 2: " +this.subTask2Value);
-        DefaultMutableTreeNode subTask3 = new DefaultMutableTreeNode("Sub Task 3: " +this.subTask3Value);
-        DefaultMutableTreeNode subTask4 = new DefaultMutableTreeNode("Sub Task 4: " +this.subTask4Value);
-        DefaultMutableTreeNode subTask5 = new DefaultMutableTreeNode("Sub Task 5: " + this.subTask5Value);
-        DefaultMutableTreeNode taskDueDate = new DefaultMutableTreeNode("Task Due Date: "+this.date);
-        DefaultMutableTreeNode taskDueTime = new DefaultMutableTreeNode("Task Due Time: "+ this.dueHour+":"+this.dueMinutes);
-        DefaultMutableTreeNode myTaskImportance = new DefaultMutableTreeNode("Task Importance: "+ this.taskImportance);
-        DefaultMutableTreeNode estDuration = new DefaultMutableTreeNode("Est Duration: "+this.taskDurationValue);
-        projName.add(projDescription);
-        projName.add(myTaskName);
-        myTaskName.add(subTask1);
-        myTaskName.add(subTask2);
-        myTaskName.add(subTask3);
-        myTaskName.add(subTask4);
-        myTaskName.add(subTask5);
-        myTaskName.add(taskDueDate);
-        myTaskName.add(taskDueTime);
-        myTaskName.add(myTaskImportance);
-        myTaskName.add(estDuration);
-
-        treeModel = new DefaultTreeModel(projName);
-
+        newTasks = new ArrayList<>();
+        taskTreeModel = new TaskTreeModel();
     }
-     */
+
+    public void addTask(Task t)
+    {
+        newTasks.add(t);
+        DefaultMutableTreeNode projectName = new DefaultMutableTreeNode("Project Name: "+t.projectName);
+        DefaultMutableTreeNode parentDescription = new DefaultMutableTreeNode("Project Description: "+t.description);
+        DefaultMutableTreeNode parentTaskName = new DefaultMutableTreeNode("Task Name: "+t.taskName
+                +" Task Due & Date: "+t.calendar+" -"+ +t.hour+" : "+ t.minutes +
+                " Task Importance : "+t.importance+" / 10");
+        DefaultMutableTreeNode taskEstimatedDuration = new DefaultMutableTreeNode("Task Est. Duration: "+ t.estimatedDuration);
+        DefaultMutableTreeNode subTask1 = new DefaultMutableTreeNode("Sub Task 1: "+t.subTask1);
+        DefaultMutableTreeNode subTask2 = new DefaultMutableTreeNode("Sub Task 2: "+t.subTask2);
+        DefaultMutableTreeNode subTask3 = new DefaultMutableTreeNode("Sub Task 3: "+t.subTask3);
+        DefaultMutableTreeNode subTask4 = new DefaultMutableTreeNode("Sub Task 4: "+t.subTask4);
+        DefaultMutableTreeNode subTask5 = new DefaultMutableTreeNode("Sub Task 5: "+t.subTask5);
+        DefaultMutableTreeNode importance = new DefaultMutableTreeNode("Task Importance : "+t.importance+" / 10");
+
+
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode) taskTreeModel.getRoot();
+        root.add(projectName);
+        projectName.add(parentDescription);
+        projectName.add(parentTaskName);
+        parentTaskName.add(taskEstimatedDuration);
+        parentTaskName.add(subTask1);
+
+        if(!t.subTask2.isEmpty()){parentTaskName.add(subTask2);}
+        if(!t.subTask3.isEmpty()){parentTaskName.add(subTask3);}
+        if(!t.subTask4.isEmpty()){parentTaskName.add(subTask4);}
+        if(!t.subTask5.isEmpty()){parentTaskName.add(subTask5);}
+        taskTreeModel.fireTreeNodeAdded(projectName);
+    }
+
+
+
+
+    /*
     public void addTasks(String projectName,
                          String projectDescription,
                          String taskName, String subTask1Value,
@@ -84,11 +96,11 @@ public class AddTaskModel {
         this.taskDurationValue = taskDurationValue;
 
     }
+     */
 
 
-
-    public DefaultTreeModel getTaskTreeModel() {
-        return treeModel;}
+    public TaskTreeModel getTaskTreeModel() {
+        return taskTreeModel;}
 
 
 

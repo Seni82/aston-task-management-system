@@ -1,5 +1,6 @@
 package view;
 import model.AddTaskModel;
+import model.Task;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
@@ -197,28 +198,12 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
 
     private void addTaskEvent(ActionEvent actionEvent) {
-        projectNameValue = projectNameEntry.getText();
-        projectDescriptionValue = descriptionEntry.getText();
-        taskNameValue = taskNameEntry.getText();
-        subTask1Value = subTask1NameEntry.getText();
-        subTask2Value = subTask2NameEntry.getText();
-        subTask3Value = subTask3NameEntry.getText();
-        subTask4Value = subTask4NameEntry.getText();
-        subTask5Value = subTask5NameEntry.getText();
-
-
-        date = dateModel.getValue();
-        hourValue = (Integer)this.hour.getValue();
-        minutesValue = (Integer)this.minutes.getValue();
-        selectedImportanceNumberValue = (Integer)importanceDropDownComponent.getSelectedItem();
-        taskDurationValue = estimatedTaskDurationField.getText();
-
-
-        model.addTasks(projectNameValue,projectDescriptionValue,taskNameValue,
-                subTask1Value, subTask2Value, subTask3Value, subTask4Value,
-                subTask5Value, date, hourValue,
-                minutesValue, selectedImportanceNumberValue, taskDurationValue);
-
+        Task newTask = new Task(projectNameEntry.getText(), descriptionEntry.getText(),
+                importanceDropDownComponent.getSelectedIndex(),
+                (Integer)this.hour.getValue(), (Integer) this.minutes.getValue(),taskNameEntry.getText(),dateModel.getValue(),
+                subTask1NameEntry.getText(), subTask2NameEntry.getText(), subTask3NameEntry.getText(),
+                subTask4NameEntry.getText(), subTask5NameEntry.getText(), estimatedTaskDurationField.getText());
+        model.addTask(newTask);
          clearField();
     }
 
@@ -237,8 +222,6 @@ public class AddTaskPanel extends AbstractCommonComponents {
         importanceDropDownComponent.setSelectedItem(0);
         estimatedTaskDurationField.setText(null);
     }
-
-
  }
 
 

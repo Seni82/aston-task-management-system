@@ -24,6 +24,8 @@ public class TaskTreePanel extends AbstractCommonComponents {
         this.model = model;
 
 
+
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
         //Add a search field on the task lists.
         searchField = new JTextField();
         searchField.setBounds(2, 20, this.getWidth() - 137, 30);
@@ -31,6 +33,7 @@ public class TaskTreePanel extends AbstractCommonComponents {
 
         taskTree = new JTree(model.getTaskTreeModel());
         taskTree.setShowsRootHandles(true);
+        taskTree.setRootVisible(false);
         scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.getViewport().setView(taskTree);
         System.out.println("The number we are looking for "+(width - 10) + "height: "+ (height - 93));
