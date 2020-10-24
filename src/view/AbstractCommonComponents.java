@@ -2,10 +2,11 @@ package view;
 import model.Model;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
 
 public abstract class AbstractCommonComponents extends JPanel {
-    protected final Model model;
+    protected Model model;
 
     //common functionality between panel is added here
     public AbstractCommonComponents(String panelTitle , Model model,int x, int y, int width, int height, Color color, Boolean createTitleBoder, int boundsHeight)
@@ -22,13 +23,15 @@ public abstract class AbstractCommonComponents extends JPanel {
         this.add(panelLabel);
     }
 
-    protected void createJButton(JButton buttonName, String title, int x, int y, int width, int height, Boolean buttonEnabled, Color color, Boolean setButtonColor)
+    protected JButton createJButton(JButton buttonName, String title, int x, int y, int width, int height, Boolean buttonEnabled, Color color, Boolean setButtonColor)
     {
         buttonName = new JButton(title);
         buttonName.setBounds(x, y, width, height);
         buttonName.setEnabled(buttonEnabled);
         if(setButtonColor == true){buttonName.setBackground(color);buttonName.setForeground(color);}
         this.add(buttonName);
+
+        return buttonName;
     }
 
     protected void createJLabel(JLabel labelName, String title,int x , int y, int width, int height, Color color){
@@ -40,9 +43,13 @@ public abstract class AbstractCommonComponents extends JPanel {
         this.add(labelName);
     }
 
-    protected void createJTextField(JTextField textFieldName, int FIELD_START, int y, int width, int height){
+    protected JTextField createJTextField(JTextField textFieldName, int FIELD_START, int y, int width, int height){
         textFieldName = new JTextField();
         textFieldName.setBounds(FIELD_START, y, width, height);
         this.add(textFieldName);
+
+        return textFieldName;
     }
+
+    protected abstract void taskTree(DefaultMutableTreeNode node);
 }
