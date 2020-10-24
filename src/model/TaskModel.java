@@ -7,6 +7,7 @@ import java.util.Calendar;
 
 public class TaskModel {
     public static final Integer IMPORTANCE_MODEL[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    private int id;
     private String projectName;
     private String projectDescription;
     private String taskName;
@@ -26,14 +27,14 @@ public class TaskModel {
     DefaultTreeModel dfModel;
     DefaultMutableTreeNode root;
 
-    public TaskModel(String projectName,
+    public TaskModel(int id, String projectName,
                          String projectDescription,
                          String taskName, String subTask1Value,
                          String subTask2Value,String subTask3Value,
                          String subTask4Value,String subTask5Value,
                          Calendar date,int dueHour,int dueMinutes,
                          int taskImportance,String taskDurationValue){
-
+        this.id = id;
         this.projectName = projectName;
         this.projectDescription = projectDescription;
         this.taskName = taskName;
@@ -57,6 +58,24 @@ public class TaskModel {
 
     public String getProjectName() {
         return this.projectName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void deleteSubTask(int index){
+        if(index == 0)
+            this.subTask1Value = "";
+        else if(index == 1)
+            this.subTask2Value = "";
+        else if(index == 2)
+            this.subTask3Value = "";
+        else if(index == 3)
+            this.subTask4Value = "";
+        else if(index == 4)
+            this.subTask5Value = "";
+
     }
 
 }

@@ -211,7 +211,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
         selectedImportanceNumberValue = (Integer)importanceDropDownComponent.getSelectedItem();
         taskDurationValue = estimatedTaskDurationField.getText();
 
-        TaskModel tempTask = new TaskModel(projectNameValue,projectDescriptionValue,taskNameValue,
+        TaskModel tempTask = new TaskModel(AllTasks.getNextId(), projectNameValue,projectDescriptionValue,taskNameValue,
                 subTask1Value, subTask2Value, subTask3Value, subTask4Value,
                 subTask5Value, date, hourValue,
                 minutesValue, selectedImportanceNumberValue, taskDurationValue);

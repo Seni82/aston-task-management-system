@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+
 import model.AllTasks;
 
 public class TaskTreePanel extends AbstractCommonComponents {
@@ -45,33 +47,58 @@ public class TaskTreePanel extends AbstractCommonComponents {
         startTaskButton.setBounds(this.getWidth() / 3 - 50, height - 42, 100, 40);
         startTaskButton.setEnabled(false);
         startTaskButton.setBackground(Color.BLACK);
-        startTaskButton.setForeground(Color.BLACK);
+        startTaskButton.setForeground(Color.WHITE);
         this.add(startTaskButton);
 
-        deleteTaskButton = new JButton("Delete Task");
-        deleteTaskButton.setBounds(2 * this.getWidth() / 3 - 50, height - 42, 100, 40);
-        deleteTaskButton.setEnabled(false);
+        deleteTaskButton = new JButton("Delete Selected");
+        deleteTaskButton.setBounds(2 * this.getWidth() / 3 - 50, height - 42, 130, 40);
+        deleteTaskButton.setEnabled(true);
         deleteTaskButton.setBackground(Color.BLACK);
-        deleteTaskButton.setForeground(Color.BLACK);
+        deleteTaskButton.setForeground(Color.WHITE);
+        deleteTaskButton.addActionListener(this::deleteNode);
         this.add(deleteTaskButton);
 
         searchButton = new JButton("Search");
         searchButton.setBounds(this.getWidth() - 130, 18, 125, 33);
         searchButton.setEnabled(true);
-        searchButton.setBackground(Color.BLACK);
-        searchButton.setBackground(Color.BLACK);
+        searchButton.setBackground(Color.BLUE);
+        searchButton.setBackground(Color.WHITE);
         this.add(searchButton);
+    }
+
+    private void deleteNode(ActionEvent actionEvent) {
+
+        //get selected node
+        ProjectTreeNode selectedNode = (ProjectTreeNode)taskTree.getLastSelectedPathComponent();
+
+        //check if node is a project node or a subtask node
+
+        if(selectedNode.getSubTaskIndex() == -1){
+            //if project node. get project id and delete from alltasks array
+            AllTasks.deleteTask(selectedNode.getProjectId());
+        }
+        else {
+            //if subtask node, get project id then get subtask id then find the object in the task array and
+            // set the subtask index to empty string
+            AllTasks.deleteSubTask(selectedNode.getProjectId(),selectedNode.getSubTaskIndex());
+        }
+
+
+
+
+        this.updateTree();
+
     }
 
     public void updateTree(){
 
         rootNode.removeAllChildren();
         for (int i = 0; i < AllTasks.tasks.size(); i++) {
-            DefaultMutableTreeNode projectNode = new DefaultMutableTreeNode(AllTasks.tasks.get(i).getProjectName());
+            ProjectTreeNode projectNode = new ProjectTreeNode(AllTasks.tasks.get(i).getId(), -1, AllTasks.tasks.get(i).getProjectName());
             String[] subTasks = AllTasks.tasks.get(i).getSubTasks();
             for(int j = 0; j < 5; j++){
                 if(subTasks[j].length() > 0 ) {
-                    DefaultMutableTreeNode subTaskNode = new DefaultMutableTreeNode(subTasks[j]);
+                    ProjectTreeNode subTaskNode = new ProjectTreeNode(AllTasks.tasks.get(i).getId(), j, subTasks[j]);
                     projectNode.add(subTaskNode);
                 }
             }
