@@ -220,7 +220,6 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
         treePanel.updateTree();
 
-
         clearField();
     }
 

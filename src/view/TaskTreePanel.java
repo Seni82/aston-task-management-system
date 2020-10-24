@@ -70,8 +70,10 @@ public class TaskTreePanel extends AbstractCommonComponents {
             DefaultMutableTreeNode projectNode = new DefaultMutableTreeNode(AllTasks.tasks.get(i).getProjectName());
             String[] subTasks = AllTasks.tasks.get(i).getSubTasks();
             for(int j = 0; j < 5; j++){
-                DefaultMutableTreeNode subTaskNode = new DefaultMutableTreeNode(subTasks[j]);
-                projectNode.add(subTaskNode);
+                if(subTasks[j].length() > 0 ) {
+                    DefaultMutableTreeNode subTaskNode = new DefaultMutableTreeNode(subTasks[j]);
+                    projectNode.add(subTaskNode);
+                }
             }
             rootNode.add(projectNode);
         }
