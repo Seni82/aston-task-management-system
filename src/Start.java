@@ -16,6 +16,6 @@ public class Start {
 
     public static void main(String[] args)
     {
-        SwingUtilities.invokeLater(() -> new AppFrame(new Model()));
+        SwingUtilities.invokeLater(() -> new AppFrame());
     }
 }

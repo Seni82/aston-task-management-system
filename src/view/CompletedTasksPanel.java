@@ -11,6 +11,6 @@ public class CompletedTasksPanel extends AbstractCommonComponents{
 
 
     public CompletedTasksPanel(String completedTaskPanelTitle, int x, int y, Model model, int width, int height, Color color, Boolean createBorder, int boundsHeight){
-        super(completedTaskPanelTitle,model,x,y,width, height,color,createBorder,boundsHeight);
+        super(completedTaskPanelTitle,x,y,width, height,color,createBorder,boundsHeight);
     }
 }

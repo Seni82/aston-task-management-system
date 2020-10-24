@@ -1,7 +1,14 @@
 package view;
 import model.Model;
+import model.Task;
+
 import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 /**
@@ -44,18 +51,21 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
     private JButton clearTaskButton;
     private JButton taskUpdateButton;
-    private Model model;
+
     private JButton addTaskButton;
+    public Model modelTask;
+
 
     public AddTaskPanel(String addTaskPanelTitle, Model model,int x, int y, int width, int height, Color color, Boolean createBorder, int boundsHeight) {
-        super(addTaskPanelTitle, model, x, y, width,height, color, createBorder, boundsHeight);
-        this.model = model;
+        super(addTaskPanelTitle, x, y, width,height, color, createBorder, boundsHeight);
+        modelTask = model;
+      //  this.model = modelTask;
 
         //Project Name and field
         createJLabel(projectName, "Project Name:",5 , 20, FIELD_START - 2, 15, color);
-        createJTextField(projectNameEntry, FIELD_START , 18, 3*(this.getWidth()-120)/4, 20);
+        projectNameEntry=createJTextField( FIELD_START , 18, 3*(this.getWidth()-120)/4, 20);
 
-
+/*
         //Description and field name.
         createJLabel(description, "Description:",5 , 45, FIELD_START - 2, 15, color);
         createJTextField(descriptionEntry, FIELD_START , 43, this.getWidth()-120, 20);
@@ -93,12 +103,13 @@ public class AddTaskPanel extends AbstractCommonComponents {
         //Task due time field
         createJLabel(taskDueTime, "Due Time:",138+(this.getWidth()-220)/2, 220, FIELD_START - 27, 15, color);
         createJTextField(taskDueTimeEntry, 200+(this.getWidth()-220)/2, 218, (this.getWidth()-220)/2, 20);
-
+*/
         //Importance field and combo box.
         createJLabel(taskImportance, "Importance:",5, 250, FIELD_START - 2, 15, color);
         importanceDropDownComponent = new JComboBox(model.getImportanceModel());
         importanceDropDownComponent.setBounds(FIELD_START, 248, (this.getWidth()-120)/3, 20);
         this.add(importanceDropDownComponent);
+
 
         createJLabel(lowAndMediumPriorityRangeDescription, "[0 - 3 : LOW]        " +
                         "[4 - 6 : MEDIUM]",
@@ -108,17 +119,33 @@ public class AddTaskPanel extends AbstractCommonComponents {
                         "[10 : HIGHEST]",
                 110+(this.getWidth()-120)/3, 263, 2*(this.getWidth()-120)/3, 15, color);
 
-
+/*
         //Estimated Duration and field name.
         createJLabel(estimatedTaskDuration, "Est. Duration:",5, 283, FIELD_START-2, 15, color);
-        createJTextField(estimatedTaskDurationField, FIELD_START, 281, 50+(this.getWidth()-220)/2, 20);
-
+        createJTextField(estimatedTaskDurationField, FIELD_START, 281, (this.getWidth()-220)/2, 20);
+*/
         //create buttons
-        createJButton(addTaskButton,"Add Task", this.getWidth()/4-50, height-42, 100, 40, true,Color.blue,true);
-        createJButton(taskUpdateButton,"Update Task",this.getWidth()/2-50, height-42, 100,40, false, Color.blue, true);
-        createJButton(clearTaskButton,"Clear Field",3*this.getWidth()/4-50, height-42, 100,40, false, Color.blue, true);
+        addTaskButton=createJButton("Add Task", this.getWidth()/4-50, height-42, 100, 40, true,Color.blue,true);
+        //createJButton(taskUpdateButton,"Update Task",this.getWidth()/2-50, height-42, 100,40, false, Color.blue, true);
+        //createJButton(clearTaskButton,"Clear Field",3*this.getWidth()/4-50, height-42, 100,40, false, Color.blue, true);
         
+        addTaskButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (projectNameEntry.getText().isEmpty() ){
+                    JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+                    JOptionPane.showMessageDialog(frame, "Please complete compulsory fields.");
+                }
+                else{
+                    Task newTask = new Task(projectNameEntry.getText(), importanceDropDownComponent.getSelectedIndex());
 
+                    modelTask.addTask(newTask);
+                    //modelTask.taskTreeModel.insertNodeInto(new DefaultMutableTreeNode(projectNameEntry.getText()), model.rootNode, 0);
+                  //  modelTask.getTaskTreeModel().fireTreeNodeAdded((TreeNode) newTask);
+                }
+
+            }
+        });
     }
 }
 
