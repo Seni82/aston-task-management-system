@@ -1,6 +1,7 @@
 package model;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import java.util.*;
 
 
@@ -47,7 +48,27 @@ public class AddTaskModel {
     }
 
 
+    public Task getTaskByName(String name) {
+        for (Task task : newTasks) {
+            if (task.projectName.equals(name)) {
+                return task;
+            }
+        }
 
+        return null;
+    }
+
+    public void deleteTask(Task task, TreeNode taskRoot) {
+        newTasks.remove(task);
+
+        if (newTasks.isEmpty()) {
+            DefaultMutableTreeNode root = (DefaultMutableTreeNode)taskTreeModel.getRoot();
+            root.removeAllChildren();
+            taskTreeModel.fireLastNodeRemoved(taskRoot);
+        } else {
+            SortTree();
+        }
+    }
 
 
 //    public void setDateTime(Date datetime) {

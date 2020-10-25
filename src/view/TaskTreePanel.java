@@ -1,8 +1,11 @@
 package view;
 import model.AddTaskModel;
+import model.Task;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,6 +25,7 @@ public class TaskTreePanel extends AbstractCommonComponents {
     private JButton searchButton;
     private AddTaskModel model;
     private JTree taskTree;
+    private AddTaskPanel addTaskPanel;
 
 
     public TaskTreePanel(String taskTreePanelTitle, int x, int y, int width, int height, Color color, Boolean createBorder, int boundsHeight, AddTaskModel model) {
@@ -58,6 +62,40 @@ public class TaskTreePanel extends AbstractCommonComponents {
         deleteTaskButton.setEnabled(true);
         deleteTaskButton.setBackground(Color.BLACK);
         deleteTaskButton.setForeground(Color.BLACK);
+        deleteTaskButton.addActionListener((event)-> {
+            if (taskTree.getSelectionPath() == null) {
+                return;
+            }
+            Object[] path = taskTree.getSelectionPath().getPath();
+            //[,Project  Name] | [,Project Name, description] | [,Project Name,Task Name, Sub Task]
+
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) path[1];
+            String title = (String)node.getUserObject();
+            String taskName = title.substring("Project Name: ".length());
+            Task task = model.getTaskByName(taskName);
+
+            int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete", "Delete?", JOptionPane.YES_NO_OPTION);
+            if (result != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            if (path.length < 4) {
+                // task
+                model.deleteTask(task, node);
+            } else {
+                 // sub task
+                String contents = (String) ((DefaultMutableTreeNode) path[3]).getUserObject();
+                contents = contents.substring("Sub Task ".length(), "Sub Task ".length() + 1); //Sub Task {num}
+                int subtaskNum = Integer.parseInt(contents);
+
+                if (task.removeSubTask(subtaskNum)) {
+                    model.deleteTask(task, node);
+                } else {
+                    model.SortTree();
+                }
+            }
+
+        });
         this.add(deleteTaskButton);
 
         searchButton = new JButton("Search");
@@ -67,6 +105,20 @@ public class TaskTreePanel extends AbstractCommonComponents {
         searchButton.setBackground(Color.BLACK);
         this.add(searchButton);
         searchButton.addActionListener(this::actionPerformed);
+
+
+        taskTree.getSelectionModel().addTreeSelectionListener((event)-> {
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) event.getPath().getPath()[1];
+            String title = (String)node.getUserObject();
+
+            String taskName = title.substring("Project Name: ".length());
+            Task task = model.getTaskByName(taskName);
+            if (task == null) {
+                return;
+            }
+
+            addTaskPanel.showTask(task);
+        });
     }
 
 
@@ -129,4 +181,7 @@ public class TaskTreePanel extends AbstractCommonComponents {
     }
 
 
+    public void setAddTaskPanel(AddTaskPanel addTaskPanel) {
+        this.addTaskPanel = addTaskPanel;
+    }
 }
