@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class Task {
 
@@ -17,12 +18,12 @@ public class Task {
     public final int hour;
     public final int minutes;
     public String estimatedDuration;
+    private Date dateTime;
 
 
     public Task(String projectName, String description, int importance, int hour, int minutes, String taskName, Calendar calendar,
                 String subTask1, String subTask2,
-                String subTask3, String subTask4, String subTask5, String estimatedDuration)
-    {
+                String subTask3, String subTask4, String subTask5, String estimatedDuration) {
         this.subTask1 = subTask1;
         this.projectName = projectName;
         this.description = description;
@@ -37,4 +38,14 @@ public class Task {
         this.minutes = minutes;
         this.estimatedDuration = estimatedDuration;
     }
+
+//    public <T> Comparable getDateTime() {
+//        return null;
+//    }
+    public Date getDateTime() {
+        return dateTime;
+    }
 }
+
+
+
