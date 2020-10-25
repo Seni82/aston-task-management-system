@@ -9,7 +9,6 @@ public class TaskComparator implements Comparator<Task> {
         int importance2 = o2.importance;
         if (importance1-importance2 < 0) {
             return 1;
-
         }
         else if (importance1-importance2 == 0 ){
             return 0;
