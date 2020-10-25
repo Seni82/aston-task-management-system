@@ -1,12 +1,12 @@
 package model;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.*;
 
 
 public class AddTaskModel {
 
+//    private Comparator taskComparator;
     private String projectName;
     private String projectDescription;
     private String taskName;
@@ -22,50 +22,78 @@ public class AddTaskModel {
     private String taskDurationValue;
     DefaultMutableTreeNode projName;
     DefaultTreeModel treeModel;
-    ArrayList newTasks;
     DefaultTreeModel dfModel;
     DefaultMutableTreeNode root;
 
-   private TaskTreeModel taskTreeModel;
+    public ArrayList<Task> newTasks;
+
+    private TaskTreeModel taskTreeModel;
 
     public static final Integer IMPORTANCE_MODEL[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    private Date dateTime;
 
 
-    public AddTaskModel()
-    {
+    public AddTaskModel() {
         newTasks = new ArrayList<>();
         taskTreeModel = new TaskTreeModel();
+ //       taskComparator = new TaskComparator();
     }
 
     public void addTask(Task t)
     {
         newTasks.add(t);
-        DefaultMutableTreeNode projectName = new DefaultMutableTreeNode("Project Name: "+t.projectName);
-        DefaultMutableTreeNode parentDescription = new DefaultMutableTreeNode("Project Description: "+t.description);
-        DefaultMutableTreeNode parentTaskName = new DefaultMutableTreeNode("Task Name: "+t.taskName
-                +" Task Due & Date: "+t.calendar+" -"+ +t.hour+" : "+ t.minutes +
-                " Task Importance : "+t.importance+" / 10");
-        DefaultMutableTreeNode taskEstimatedDuration = new DefaultMutableTreeNode("Task Est. Duration: "+ t.estimatedDuration);
-        DefaultMutableTreeNode subTask1 = new DefaultMutableTreeNode("Sub Task 1: "+t.subTask1);
-        DefaultMutableTreeNode subTask2 = new DefaultMutableTreeNode("Sub Task 2: "+t.subTask2);
-        DefaultMutableTreeNode subTask3 = new DefaultMutableTreeNode("Sub Task 3: "+t.subTask3);
-        DefaultMutableTreeNode subTask4 = new DefaultMutableTreeNode("Sub Task 4: "+t.subTask4);
-        DefaultMutableTreeNode subTask5 = new DefaultMutableTreeNode("Sub Task 5: "+t.subTask5);
-        DefaultMutableTreeNode importance = new DefaultMutableTreeNode("Task Importance : "+t.importance+" / 10");
+
+        SortTree();
+    }
 
 
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode) taskTreeModel.getRoot();
-        root.add(projectName);
-        projectName.add(parentDescription);
-        projectName.add(parentTaskName);
-        parentTaskName.add(taskEstimatedDuration);
-        parentTaskName.add(subTask1);
 
-        if(!t.subTask2.isEmpty()){parentTaskName.add(subTask2);}
-        if(!t.subTask3.isEmpty()){parentTaskName.add(subTask3);}
-        if(!t.subTask4.isEmpty()){parentTaskName.add(subTask4);}
-        if(!t.subTask5.isEmpty()){parentTaskName.add(subTask5);}
-        taskTreeModel.fireTreeNodeAdded(projectName);
+
+
+//    public void setDateTime(Date datetime) {
+//        this.dateTime = datetime;
+//    }
+//
+    public void SortTree(){
+
+//        sort array list by due date
+        newTasks.sort((o1,o2) -> o1.calendar.compareTo(o2.calendar));
+
+       // Clear JTree of current Tasks
+        DefaultMutableTreeNode root = (DefaultMutableTreeNode)taskTreeModel.getRoot();
+        root.removeAllChildren();
+//        Pass new tasks into JTree
+        for (Task task:newTasks){
+            DefaultMutableTreeNode projectName = new DefaultMutableTreeNode("Project Name: "+task.projectName);
+            DefaultMutableTreeNode parentDescription = new DefaultMutableTreeNode("Project Description: "+task.description);
+            DefaultMutableTreeNode parentTaskName = new DefaultMutableTreeNode("Task Name: "+task.taskName
+                    +" Task Due & Date: "+task.calendar.getTime()+" -"+ +task.hour+" : "+ task.minutes +
+                    " Task Importance : "+task.importance+" / 10");
+            DefaultMutableTreeNode taskEstimatedDuration = new DefaultMutableTreeNode("Task Est. Duration: "+ task.estimatedDuration);
+            DefaultMutableTreeNode subTask1 = new DefaultMutableTreeNode("Sub Task 1: "+task.subTask1);
+            DefaultMutableTreeNode subTask2 = new DefaultMutableTreeNode("Sub Task 2: "+task.subTask2);
+            DefaultMutableTreeNode subTask3 = new DefaultMutableTreeNode("Sub Task 3: "+task.subTask3);
+            DefaultMutableTreeNode subTask4 = new DefaultMutableTreeNode("Sub Task 4: "+task.subTask4);
+            DefaultMutableTreeNode subTask5 = new DefaultMutableTreeNode("Sub Task 5: "+task.subTask5);
+            DefaultMutableTreeNode importance = new DefaultMutableTreeNode("Task Importance : "+task.importance+" / 10");
+
+
+
+            root.add(projectName);
+            projectName.add(parentDescription);
+            projectName.add(parentTaskName);
+            parentTaskName.add(taskEstimatedDuration);
+            parentTaskName.add(subTask1);
+
+            if(!task.subTask2.isEmpty()){parentTaskName.add(subTask2);}
+            if(!task.subTask3.isEmpty()){parentTaskName.add(subTask3);}
+            if(!task.subTask4.isEmpty()){parentTaskName.add(subTask4);}
+            if(!task.subTask5.isEmpty()){parentTaskName.add(subTask5);}
+            //        fire node to take up new Jtree tasks in order
+            taskTreeModel.fireTreeNodeAdded(projectName);
+        }
+
+
     }
 
 

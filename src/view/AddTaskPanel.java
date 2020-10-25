@@ -80,7 +80,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
         this.model = model;
 
         //Project Name and field
-        createJLabel(projectName, "Project Name:", 5, 20, FIELD_START - 2, 15, color);
+        createJLabel(projectName, "* Project Name:", 5, 20, FIELD_START - 2, 15, color);
         projectNameEntry = new JTextField();
         projectNameEntry.setBounds(FIELD_START, 18, 3 * (this.getWidth() - 150) / 4, 20);
         this.add(projectNameEntry);
@@ -160,18 +160,18 @@ public class AddTaskPanel extends AbstractCommonComponents {
         dateModel = new UtilCalendarModel();
         datePanel = new JDatePanelImpl(dateModel);
         datePicker = new JDatePickerImpl(datePanel);
-        datePicker.setBounds(FIELD_START, 218, (this.getWidth()-340)/2, 25);
+        datePicker.setBounds(FIELD_START, 218, 20+(this.getWidth()-220)/2, 25);
         this.add(datePicker);
-        createJLabel(taskDueDate, "Due Date:",5, 225, FIELD_START - 2, 15, color);
+        createJLabel(taskDueDate, "Due Date:",5, 225, FIELD_START -2, 15, color);
 
         //Task due time field
-        createJLabel(taskDueTime, "Task Due Time:",80+(this.getWidth()-220)/2, 225, FIELD_START , 15, color);
+        createJLabel(taskDueTime, "Due Time:",120+(this.getWidth()-220)/2, 225, 80 , 15, color);
         hour = new JSpinner(new SpinnerNumberModel(0, 0, 23, 1));
-        hour.setBounds((this.getWidth()+135)/2,220,(this.getWidth()-590)/2, 25);
+        hour.setBounds(195+(this.getWidth()-220)/2,220,(this.getWidth()-220)/5, 25);
         this.add(hour);
-        createJLabel(taskDueTime, ":",(this.getWidth()+220)/2, 220, 5, 25, color);
+        createJLabel(taskDueTime, ":",250+(this.getWidth()-220)/2, 220, 5, 25, color);
         minutes = new JSpinner(new SpinnerNumberModel(0, 0, 59, 1));
-        minutes.setBounds((this.getWidth()+227)/2,220,(this.getWidth()-590)/2, 25);
+        minutes.setBounds(265+(this.getWidth()-220)/2,220,(this.getWidth()-220)/5, 25);
         this.add(minutes);
 
         //Importance field and combo box.
@@ -198,6 +198,13 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
 
     private void addTaskEvent(ActionEvent actionEvent) {
+
+        if (projectNameEntry.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Project Name is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+        return;
+
+        }
+
         Task newTask = new Task(projectNameEntry.getText(), descriptionEntry.getText(),
                 importanceDropDownComponent.getSelectedIndex(),
                 (Integer)this.hour.getValue(), (Integer) this.minutes.getValue(),taskNameEntry.getText(),dateModel.getValue(),
