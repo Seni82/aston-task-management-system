@@ -67,7 +67,7 @@ public class AddTaskModel {
             DefaultMutableTreeNode projectName = new DefaultMutableTreeNode("Project Name: "+task.projectName);
             DefaultMutableTreeNode parentDescription = new DefaultMutableTreeNode("Project Description: "+task.description);
             DefaultMutableTreeNode parentTaskName = new DefaultMutableTreeNode("Task Name: "+task.taskName
-                    +" Task Due & Date: "+task.calendar+" -"+ +task.hour+" : "+ task.minutes +
+                    +" Task Due & Date: "+task.calendar.getTime()+" -"+ +task.hour+" : "+ task.minutes +
                     " Task Importance : "+task.importance+" / 10");
             DefaultMutableTreeNode taskEstimatedDuration = new DefaultMutableTreeNode("Task Est. Duration: "+ task.estimatedDuration);
             DefaultMutableTreeNode subTask1 = new DefaultMutableTreeNode("Sub Task 1: "+task.subTask1);
