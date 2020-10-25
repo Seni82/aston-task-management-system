@@ -1,12 +1,12 @@
 package model;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
 public class AddTaskModel {
 
-//  private Comparator taskComparator;
     private String projectName;
     private String projectDescription;
     private String taskName;
@@ -36,7 +36,7 @@ public class AddTaskModel {
     public AddTaskModel() {
         newTasks = new ArrayList<>();
         taskTreeModel = new TaskTreeModel();
- //       taskComparator = new TaskComparator();
+
     }
 
     public void addTask(Task t)
@@ -57,18 +57,21 @@ public class AddTaskModel {
     public void SortTree(){
 
 //        sort array list by due date
-        newTasks.sort((o1,o2) -> o1.date.compareTo(o2.date));
+
+        Collections.sort(newTasks, Comparator.comparing(Task::getImportance).thenComparing(Task::getLatestStartDate));
 
        // Clear JTree of current Tasks
         DefaultMutableTreeNode root = (DefaultMutableTreeNode)taskTreeModel.getRoot();
         root.removeAllChildren();
 //        Pass new tasks into JTree
         for (Task task:newTasks){
+            SimpleDateFormat simpleDate = new SimpleDateFormat("dd MMM , yyyy.");
+            String myDate = simpleDate.format(task.date);
             DefaultMutableTreeNode projectName = new DefaultMutableTreeNode("Project Name: "+task.projectName);
             DefaultMutableTreeNode parentDescription = new DefaultMutableTreeNode("Project Description: "+task.description);
             DefaultMutableTreeNode parentTaskName = new DefaultMutableTreeNode("Task Name: "+task.taskName);
             DefaultMutableTreeNode taskEstimatedDuration = new DefaultMutableTreeNode("Task Est. Duration: "+ task.estimatedDuration);
-            DefaultMutableTreeNode dueDateTimeAndImportance = new DefaultMutableTreeNode(" Due Date: "+ task.date +" - "+ " Due Time: "+
+            DefaultMutableTreeNode dueDateTimeAndImportance = new DefaultMutableTreeNode(" Due Date: "+ myDate +" - "+ " Due Time: "+
                     task.hour+":"+task.minutes+" - Importance: "+task.importance+" / 10");
             DefaultMutableTreeNode subTask1 = new DefaultMutableTreeNode("Sub Task 1: "+task.subTask1);
             DefaultMutableTreeNode subTask2 = new DefaultMutableTreeNode("Sub Task 2: "+task.subTask2);
