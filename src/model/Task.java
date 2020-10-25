@@ -14,14 +14,14 @@ public class Task {
     public final String subTask4;
     public final String subTask5;
     public final int importance;
-    public final Calendar calendar;
+    public final String date;
     public final int hour;
     public final int minutes;
     public String estimatedDuration;
     private Date dateTime;
 
 
-    public Task(String projectName, String description, int importance, int hour, int minutes, String taskName, Calendar calendar,
+    public Task(String projectName, String description, int importance, int hour, int minutes, String taskName, String date,
                 String subTask1, String subTask2,
                 String subTask3, String subTask4, String subTask5, String estimatedDuration) {
         this.subTask1 = subTask1;
@@ -33,15 +33,12 @@ public class Task {
         this.subTask3 = subTask3;
         this.subTask4 = subTask4;
         this.subTask5 = subTask5;
-        this.calendar = calendar;
+        this.date = date;
         this.hour = hour;
         this.minutes = minutes;
         this.estimatedDuration = estimatedDuration;
     }
 
-//    public <T> Comparable getDateTime() {
-//        return null;
-//    }
     public Date getDateTime() {
         return dateTime;
     }
