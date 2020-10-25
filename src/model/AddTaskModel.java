@@ -6,7 +6,7 @@ import java.util.*;
 
 public class AddTaskModel {
 
-//    private Comparator taskComparator;
+//  private Comparator taskComparator;
     private String projectName;
     private String projectDescription;
     private String taskName;
@@ -57,7 +57,7 @@ public class AddTaskModel {
     public void SortTree(){
 
 //        sort array list by due date
-        newTasks.sort((o1,o2) -> o1.calendar.compareTo(o2.calendar));
+        newTasks.sort((o1,o2) -> o1.date.compareTo(o2.date));
 
        // Clear JTree of current Tasks
         DefaultMutableTreeNode root = (DefaultMutableTreeNode)taskTreeModel.getRoot();
@@ -66,10 +66,10 @@ public class AddTaskModel {
         for (Task task:newTasks){
             DefaultMutableTreeNode projectName = new DefaultMutableTreeNode("Project Name: "+task.projectName);
             DefaultMutableTreeNode parentDescription = new DefaultMutableTreeNode("Project Description: "+task.description);
-            DefaultMutableTreeNode parentTaskName = new DefaultMutableTreeNode("Task Name: "+task.taskName
-                    +" Task Due & Date: "+task.calendar.getTime()+" -"+ +task.hour+" : "+ task.minutes +
-                    " Task Importance : "+task.importance+" / 10");
+            DefaultMutableTreeNode parentTaskName = new DefaultMutableTreeNode("Task Name: "+task.taskName);
             DefaultMutableTreeNode taskEstimatedDuration = new DefaultMutableTreeNode("Task Est. Duration: "+ task.estimatedDuration);
+            DefaultMutableTreeNode dueDateTimeAndImportance = new DefaultMutableTreeNode(" Due Date: "+ task.date +" - "+ " Due Time: "+
+                    task.hour+":"+task.minutes+" - Importance: "+task.importance+" / 10");
             DefaultMutableTreeNode subTask1 = new DefaultMutableTreeNode("Sub Task 1: "+task.subTask1);
             DefaultMutableTreeNode subTask2 = new DefaultMutableTreeNode("Sub Task 2: "+task.subTask2);
             DefaultMutableTreeNode subTask3 = new DefaultMutableTreeNode("Sub Task 3: "+task.subTask3);
@@ -77,19 +77,17 @@ public class AddTaskModel {
             DefaultMutableTreeNode subTask5 = new DefaultMutableTreeNode("Sub Task 5: "+task.subTask5);
             DefaultMutableTreeNode importance = new DefaultMutableTreeNode("Task Importance : "+task.importance+" / 10");
 
-
-
             root.add(projectName);
             projectName.add(parentDescription);
+            projectName.add(taskEstimatedDuration);
+            projectName.add(dueDateTimeAndImportance);
             projectName.add(parentTaskName);
-            parentTaskName.add(taskEstimatedDuration);
             parentTaskName.add(subTask1);
 
             if(!task.subTask2.isEmpty()){parentTaskName.add(subTask2);}
             if(!task.subTask3.isEmpty()){parentTaskName.add(subTask3);}
             if(!task.subTask4.isEmpty()){parentTaskName.add(subTask4);}
             if(!task.subTask5.isEmpty()){parentTaskName.add(subTask5);}
-            //        fire node to take up new Jtree tasks in order
             taskTreeModel.fireTreeNodeAdded(projectName);
         }
 
