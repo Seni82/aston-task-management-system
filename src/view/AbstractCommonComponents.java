@@ -27,6 +27,9 @@ public abstract class AbstractCommonComponents extends JPanel {
         this.add(panelLabel);
     }
 
+    public AbstractCommonComponents(){
+    }
+
     protected JLabel createJLabel(JLabel labelName, String title,int x , int y, int width, int height, Color color){
         labelName = new JLabel(title);
         labelName.setBounds(x, y, width, height);

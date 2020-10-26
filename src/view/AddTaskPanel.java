@@ -201,6 +201,10 @@ public class AddTaskPanel extends AbstractCommonComponents {
         this.add(estimatedTaskDurationField);
     }
 
+    public AddTaskPanel() {
+        super();
+    }
+
 
     private void addTaskEvent(ActionEvent actionEvent) {
         if (!areFieldsValidated())
@@ -329,7 +333,26 @@ public class AddTaskPanel extends AbstractCommonComponents {
         minutes.setValue(task.minutes);
         importanceDropDownComponent.setSelectedItem(task.importance);
         estimatedTaskDurationField.setText(Integer.toString(task.estimatedDuration));
+    }
 
+
+    public void ClearFieldForTest(){clearField();}
+
+
+
+    public void setFieldData()
+    {
+        projectNameEntry.setText("Test - ProjName");
+        descriptionEntry.setText("Test - Descrption");
+        taskNameEntry.setText("Ensure Fields cleared");
+        subTask1NameEntry.setText("Hello");
+        subTask2NameEntry.setText("Hello");
+        subTask3NameEntry.setText("Hello");
+        subTask4NameEntry.setText("Hello");
+        subTask5NameEntry.setText("Hello");
+        datePicker.getJFormattedTextField().setText("Hello");
+        importanceDropDownComponent.setSelectedItem(4);
+        estimatedTaskDurationField.setText("3");
     }
  }
 

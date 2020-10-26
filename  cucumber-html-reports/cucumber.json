@@ -1,0 +1,197 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 3,
+        "name": "I want to verify task can be added",
+        "description": "",
+        "id": "add-tasks;i-want-to-verify-task-can-be-added",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 4,
+            "name": "I populate all required fields",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 5,
+            "name": "I fire event to generate task",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 6,
+            "name": "I check the taskArray object",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 7,
+            "name": "task should be added",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Add Tasks",
+    "description": "",
+    "id": "add-tasks",
+    "keyword": "Feature",
+    "uri": "Test/Feature/AddTask.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 15,
+        "name": "Clear field function sets all fields to empty.",
+        "description": "",
+        "id": "ensure-all-fields-are-empty-when-clear-method-is-called.;clear-field-function-sets-all-fields-to-empty.;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "I enter data into the application",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 10,
+            "name": "I simulate \u0027clear\u0027 action button by calling \"events\" added to button",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "all data in field should be empty",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "line": 16,
+        "name": "Clear field function sets all fields to empty.",
+        "description": "",
+        "id": "ensure-all-fields-are-empty-when-clear-method-is-called.;clear-field-function-sets-all-fields-to-empty.;;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "I enter data into the application",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 10,
+            "name": "I simulate \u0027add\u0027 action button by calling \"events\" added to button",
+            "match": {},
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 11,
+            "name": "all data in field should be empty",
+            "match": {},
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Ensure all fields are empty when clear method is called.",
+    "description": "",
+    "id": "ensure-all-fields-are-empty-when-clear-method-is-called.",
+    "keyword": "Feature",
+    "uri": "Test/Feature/ClearField.feature",
+    "tags": []
+  },
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 5,
+        "name": "Ensure validation works.",
+        "description": "",
+        "id": "ensure-validation-stops-task-generation-until-form-is-filled;ensure-validation-works.",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 6,
+            "name": "I attempt to add a new task",
+            "match": {},
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 7,
+            "name": "I simulate add action",
+            "match": {},
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 8,
+            "name": "the new task is not created.",
+            "match": {},
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@StepDefAnnotation"
+          }
+        ]
+      }
+    ],
+    "name": "Ensure validation stops task generation until form is filled",
+    "description": "",
+    "id": "ensure-validation-stops-task-generation-until-form-is-filled",
+    "keyword": "Feature",
+    "uri": "Test/Feature/EnsureMandatoryFieldsAreFilled.feature",
+    "tags": []
+  }
+]
