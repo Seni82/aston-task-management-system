@@ -270,37 +270,35 @@ public class AddTaskPanel extends AbstractCommonComponents {
     }
 
     private boolean areFieldsValidated() {
-        if (projectNameEntry.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Project Name is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
+            if (projectNameEntry.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Project Name is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
 
-        if (descriptionEntry.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Description is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
+            if (descriptionEntry.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Description is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
 
-        if (taskNameEntry.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Task Name is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
+            if (taskNameEntry.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Task Name is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
 
-        if (subTask1NameEntry.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "One Subtask must be entered", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
+            if (subTask1NameEntry.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "One Subtask must be entered", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
 
-        if (datePicker.getJFormattedTextField().getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Due Date is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
+            if (datePicker.getJFormattedTextField().getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Due Date is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
 
-
-        if (estimatedTaskDurationField.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Est. Duration is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
+            if (estimatedTaskDurationField.getText().trim().isEmpty() || estimatedTaskDurationField.getText().contains(" ")) {
+                JOptionPane.showMessageDialog(this, "Est. Duration is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
         return true;
     }
 
