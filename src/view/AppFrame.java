@@ -1,5 +1,7 @@
 package view;
 import model.AddTaskModel;
+import model.Task;
+
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
@@ -68,6 +70,7 @@ public class AppFrame extends JFrame {
         comenced_task_panel.setLocation(5,height-(height/3)-20);
         comenced_task_panel.setFocusable(false);
         pane.add(comenced_task_panel);
+        model.setCommencedTasksPanel(comenced_task_panel);
 
 
         completed_task_panel = new CompletedTasksPanel("COMPLETED TASKS",0,1, rightColumnWidth,
@@ -106,7 +109,17 @@ public class AppFrame extends JFrame {
         eastFacingArrowForCompletedTasks.setBounds(task_tree_panel.getWidth()+(rightColumnStart-task_tree_panel.getWidth())/2-15,
                 (5*height/6)-30, 30, 40);
         eastFacingArrowForCompletedTasks.setBackground(Color.CYAN);
-        eastFacingArrowForCompletedTasks.setEnabled(false);
+        eastFacingArrowForCompletedTasks.setEnabled(true);
+        eastFacingArrowForCompletedTasks.addActionListener((event)-> {
+            Task task = comenced_task_panel.getCommenced();
+            if (task == null) {
+                return;
+            }
+
+            comenced_task_panel.clear();
+            completed_task_panel.addTask(task);
+            model.taskUpdated(task);
+        });
         this.add(eastFacingArrowForCompletedTasks, BorderLayout.EAST);
     }
 }

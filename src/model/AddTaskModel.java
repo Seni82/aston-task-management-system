@@ -1,4 +1,6 @@
 package model;
+import view.CommencedTasksPanel;
+
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
@@ -29,6 +31,7 @@ public class AddTaskModel {
     public ArrayList<Task> newTasks;
 
     private TaskTreeModel taskTreeModel;
+    private CommencedTasksPanel commencedTasksPanel;
 
     public static final Integer IMPORTANCE_MODEL[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     private Date dateTime;
@@ -60,6 +63,9 @@ public class AddTaskModel {
 
     public void deleteTask(Task task, TreeNode taskRoot) {
         newTasks.remove(task);
+        if (task.commenced) {
+            commencedTasksPanel.clear();
+        }
 
         if (newTasks.isEmpty()) {
             DefaultMutableTreeNode root = (DefaultMutableTreeNode)taskTreeModel.getRoot();
@@ -67,6 +73,14 @@ public class AddTaskModel {
             taskTreeModel.fireLastNodeRemoved(taskRoot);
         } else {
             SortTree();
+        }
+    }
+
+    public void taskUpdated(Task task) {
+        SortTree();
+
+        if (task.commenced) {
+            commencedTasksPanel.reload();
         }
     }
 
@@ -97,6 +111,15 @@ public class AddTaskModel {
             DefaultMutableTreeNode subTask4 = new DefaultMutableTreeNode("Sub Task 4: "+task.subTask4);
             DefaultMutableTreeNode subTask5 = new DefaultMutableTreeNode("Sub Task 5: "+task.subTask5);
             DefaultMutableTreeNode importance = new DefaultMutableTreeNode("Task Importance : "+task.importance+" / 10");
+
+            if (task.commenced) {
+                DefaultMutableTreeNode status = new DefaultMutableTreeNode("Status: Commenced");
+                projectName.add(status);
+            }
+            if (task.completed) {
+                DefaultMutableTreeNode status = new DefaultMutableTreeNode("Status: Completed");
+                projectName.add(status);
+            }
 
             root.add(projectName);
             projectName.add(parentDescription);
@@ -150,5 +173,13 @@ public class AddTaskModel {
         return taskTreeModel;}
 
 
+    public void setCommencedTasksPanel(CommencedTasksPanel commencedTasksPanel){
+        this.commencedTasksPanel = commencedTasksPanel;
+    }
 
+    public void commenceTask(Task task) {
+        if (commencedTasksPanel.showTask(task)) {
+            SortTree();
+        }
+    }
 }

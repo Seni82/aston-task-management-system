@@ -96,7 +96,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
         addTaskButton = new JButton("Add Task");
         addTaskButton.setBounds(this.getWidth()/4-50, height-42, 100, 40);
         addTaskButton.setEnabled(true);
-        addTaskButton.setBackground(Color.BLUE);
+        addTaskButton.setBackground(Color.WHITE);
         addTaskButton.setForeground(Color.BLUE);
         addTaskButton.addActionListener(this::addTaskEvent);
         this.add(addTaskButton);
@@ -104,7 +104,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
         taskUpdateButton = new JButton("Update");
         taskUpdateButton.setBounds(this.getWidth()/2-50, height-42, 100, 40);
         taskUpdateButton.setEnabled(true);
-        taskUpdateButton.setBackground(Color.BLUE);
+        taskUpdateButton.setBackground(Color.WHITE);
         taskUpdateButton.setForeground(Color.BLUE);
         taskUpdateButton.addActionListener(this::updateTask);
         this.add(taskUpdateButton);
@@ -113,8 +113,9 @@ public class AddTaskPanel extends AbstractCommonComponents {
         clearTaskButton = new JButton("Clear Field");
         clearTaskButton.setBounds(3*this.getWidth()/4-50, height-42, 100,40);
         clearTaskButton.setEnabled(true);
-        clearTaskButton.setBackground(Color.BLUE);
+        clearTaskButton.setBackground(Color.WHITE);
         clearTaskButton.setForeground(Color.BLUE);
+        clearTaskButton.addActionListener((event)-> this.clearField());
         this.add(clearTaskButton);
 
 
@@ -163,7 +164,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
         dateModel = new UtilCalendarModel();
         datePanel = new JDatePanelImpl(dateModel);
         datePicker = new JDatePickerImpl(datePanel);
-        datePicker.setBounds(FIELD_START, 218, (this.getWidth()-150)/3, 25);
+        datePicker.setBounds(FIELD_START, 218, 50+(this.getWidth()-150)/3, 25);
         this.add(datePicker);
         createJLabel(taskDueDate, "Due Date: *",5, 225, FIELD_START -2, 15, color);
 
@@ -232,6 +233,12 @@ public class AddTaskPanel extends AbstractCommonComponents {
         if (task == null) {
             return;
         }
+
+        if (task.completed) {
+            JOptionPane.showMessageDialog(this, "Cannot update completed task", "Update Task Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         task.description = descriptionEntry.getText();
         task.taskName = taskNameEntry.getText();
         task.subTask1 = subTask1NameEntry.getText();
@@ -245,7 +252,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
         task.estimatedDuration = estimatedTaskDurationField.getText();
         task.date = myDate;
 
-        model.SortTree();
+        model.taskUpdated(task);
         clearField();
     }
 
