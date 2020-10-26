@@ -91,7 +91,7 @@ public class TaskTreePanel extends AbstractCommonComponents {
                 return;
             }
 
-            int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete", "Delete?", JOptionPane.YES_NO_OPTION);
+            int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete?", "Delete?", JOptionPane.YES_NO_OPTION);
             if (result != JOptionPane.YES_OPTION) {
                 return;
             }

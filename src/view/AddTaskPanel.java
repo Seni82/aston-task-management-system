@@ -247,6 +247,11 @@ public class AddTaskPanel extends AbstractCommonComponents {
             return;
         }
 
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to update?", "Update?", JOptionPane.YES_NO_OPTION);
+        if (result != JOptionPane.YES_OPTION) {
+            return;
+
+        }
         task.description = descriptionEntry.getText();
         task.taskName = taskNameEntry.getText();
         task.subTask1 = subTask1NameEntry.getText();
