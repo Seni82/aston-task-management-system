@@ -8,6 +8,7 @@ import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -227,6 +228,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
         clearField();
     }
 
+
     private void updateTask(ActionEvent event) {
         if (!areFieldsValidated())
             return;
@@ -235,7 +237,6 @@ public class AddTaskPanel extends AbstractCommonComponents {
         Date newDate = date.getTime();
         SimpleDateFormat format = new SimpleDateFormat("dd MMM , yyyy.");
         String myDate = format.format(newDate);
-
         Task task = model.getTaskByName(projectNameEntry.getText());
         if (task == null) {
             return;
@@ -256,8 +257,8 @@ public class AddTaskPanel extends AbstractCommonComponents {
         task.importance = importanceDropDownComponent.getSelectedIndex();
         task.hour = (Integer) this.hour.getValue();
         task.minutes = (Integer) this.minutes.getValue();
-        task.estimatedDuration = estimatedTaskDurationField.getText();
-        task.date = myDate;
+        task.estimatedDuration = Integer.parseInt(estimatedTaskDurationField.getText());
+        task.date = new Date();
 
         model.taskUpdated(task);
         clearField();
@@ -314,6 +315,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
     }
 
     public void showTask(Task task) {
+
         projectNameEntry.setText(task.projectName);
         descriptionEntry.setText(task.description);
         taskNameEntry.setText(task.taskName);
@@ -322,11 +324,12 @@ public class AddTaskPanel extends AbstractCommonComponents {
         subTask3NameEntry.setText(task.subTask3);
         subTask4NameEntry.setText(task.subTask4);
         subTask5NameEntry.setText(task.subTask5);
-        datePicker.getJFormattedTextField().setText(task.date);
+        datePicker.getJFormattedTextField().setText(task.date.toString());
         hour.setValue(task.hour);
         minutes.setValue(task.minutes);
         importanceDropDownComponent.setSelectedItem(task.importance);
-        estimatedTaskDurationField.setText(task.estimatedDuration);
+        estimatedTaskDurationField.setText(Integer.toString(task.estimatedDuration));
+
     }
  }
 

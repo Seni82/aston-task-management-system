@@ -6,18 +6,18 @@ import java.util.Date;
 
 public class Task {
 
-    public final String projectName;
-    public final String description;
-    public final String taskName;
-    public final String subTask1;
-    public final String subTask2;
-    public final String subTask3;
-    public final String subTask4;
-    public final String subTask5;
-    public final int importance;
-    public final Date date;
-    public final int hour;
-    public final int minutes;
+    public String projectName;
+    public String description;
+    public String taskName;
+    public String subTask1;
+    public String subTask2;
+    public String subTask3;
+    public String subTask4;
+    public String subTask5;
+    public int importance;
+    public Date date;
+    public int hour;
+    public int minutes;
     public int estimatedDuration;
     private Date dateTime;
 
@@ -64,6 +64,8 @@ public class Task {
     public int getImportance() {
         return -importance;
     }
+
+
 
     public boolean removeSubTask(int subtaskNum) {
         switch (subtaskNum) {
