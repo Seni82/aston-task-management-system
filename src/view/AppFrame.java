@@ -52,7 +52,7 @@ public class AppFrame extends JFrame {
         final int rightColumnWidth = this.getWidth()/2;
 
         final  int rightColumnStart = this.width - rightColumnWidth - 5;
-        task_tree_panel  = new TaskTreePanel("TASK MANAGEMENT TREE",0,2,rightColumnStart-100,
+        task_tree_panel  = new TaskTreePanel("TASK MANAGEMENT TREE",0,2,rightColumnStart-10,
                 ((2*height)/3)-30,Color.black, true, 17, model);
         task_tree_panel.setLocation(5, 5);
         task_tree_panel.setFocusable(false);
@@ -65,7 +65,7 @@ public class AppFrame extends JFrame {
         pane.add(add_task_panel);
         task_tree_panel.setAddTaskPanel(add_task_panel);
 
-        comenced_task_panel = new CommencedTasksPanel("COMMENCED TASKS",0,1,rightColumnStart-100,
+        comenced_task_panel = new CommencedTasksPanel("COMMENCED TASKS",0,1,rightColumnStart-50,
                 (height/3)-10,Color.blue, true,17, model);
         comenced_task_panel.setLocation(5,height-(height/3)-20);
         comenced_task_panel.setFocusable(false);
@@ -73,32 +73,33 @@ public class AppFrame extends JFrame {
         model.setCommencedTasksPanel(comenced_task_panel);
 
 
-        completed_task_panel = new CompletedTasksPanel("COMPLETED TASKS",0,1, rightColumnWidth,
+        completed_task_panel = new CompletedTasksPanel("COMPLETED TASKS",0,1, rightColumnWidth-50,
                 (height/3)-10,Color.black, true,17, model);
-        completed_task_panel.setLocation(rightColumnStart,2*height/3-20);
+        completed_task_panel.setLocation(rightColumnStart+50,height-(height/3)-20);
+
         completed_task_panel.setFocusable(false);
         pane.add(completed_task_panel);
 
 
 
-        eastFacingArrowButtonToMoveSelectedItemForUpdate = new BasicArrowButton(BasicArrowButton.EAST);
-        eastFacingArrowButtonToMoveSelectedItemForUpdate.setBounds(task_tree_panel.getWidth()+(rightColumnStart-task_tree_panel.getWidth())/2-15
-                ,height/3-30,30,40);
-        eastFacingArrowButtonToMoveSelectedItemForUpdate.setBackground(Color.CYAN);
-        eastFacingArrowButtonToMoveSelectedItemForUpdate.setEnabled(false);
-        this.add(eastFacingArrowButtonToMoveSelectedItemForUpdate, BorderLayout.EAST);
-
-
-        JLabel labelNameMoveTaskInformationLabel = new JLabel("Move task");
-        labelNameMoveTaskInformationLabel.setBounds(task_tree_panel.getWidth()+(rightColumnStart-task_tree_panel.getWidth())/2-35,
-                height/3+15, 100, 15);
-        labelNameMoveTaskInformationLabel.setBackground(Color.RED);
-        labelNameMoveTaskInformationLabel.setForeground(Color.RED);
-        this.add(labelNameMoveTaskInformationLabel);
+//        eastFacingArrowButtonToMoveSelectedItemForUpdate = new BasicArrowButton(BasicArrowButton.EAST);
+//        eastFacingArrowButtonToMoveSelectedItemForUpdate.setBounds(task_tree_panel.getWidth()+(rightColumnStart-task_tree_panel.getWidth())/2-15
+//                ,height/3-30,30,40);
+//        eastFacingArrowButtonToMoveSelectedItemForUpdate.setBackground(Color.CYAN);
+//        eastFacingArrowButtonToMoveSelectedItemForUpdate.setEnabled(false);
+//        this.add(eastFacingArrowButtonToMoveSelectedItemForUpdate, BorderLayout.EAST);
+//
+//
+//        JLabel labelNameMoveTaskInformationLabel = new JLabel("Move task");
+//        labelNameMoveTaskInformationLabel.setBounds(task_tree_panel.getWidth()+(rightColumnStart-task_tree_panel.getWidth())/2-35,
+//                height/3+15, 100, 15);
+//        labelNameMoveTaskInformationLabel.setBackground(Color.RED);
+//        labelNameMoveTaskInformationLabel.setForeground(Color.RED);
+//        this.add(labelNameMoveTaskInformationLabel);
 
 
         completeTaskLabel = new JLabel("Complete");
-        completeTaskLabel.setBounds(task_tree_panel.getWidth()+(rightColumnStart-task_tree_panel.getWidth())/2-30,
+        completeTaskLabel.setBounds(this.getWidth()/2-35,
                 (5*height/6)+15, 100, 15);
         completeTaskLabel.setBackground(Color.RED);
         completeTaskLabel.setForeground(Color.RED);
@@ -106,8 +107,8 @@ public class AppFrame extends JFrame {
 
 
         eastFacingArrowForCompletedTasks = new BasicArrowButton(BasicArrowButton.EAST);
-        eastFacingArrowForCompletedTasks.setBounds(task_tree_panel.getWidth()+(rightColumnStart-task_tree_panel.getWidth())/2-15,
-                (5*height/6)-30, 30, 40);
+        eastFacingArrowForCompletedTasks.setBounds(this.getWidth()/2-28,
+                (5*height/6)-30, 50, 40);
         eastFacingArrowForCompletedTasks.setBackground(Color.CYAN);
         eastFacingArrowForCompletedTasks.setEnabled(true);
         eastFacingArrowForCompletedTasks.addActionListener((event)-> {

@@ -19,8 +19,9 @@ public class CompletedTasksPanel extends AbstractCommonComponents{
         super(completedTaskPanelTitle,x,y,width, height,color,createBorder,boundsHeight);
         listModel = new DefaultListModel<>();
         taskList = new JList<>(listModel);
-        taskList.setBounds(x, y, width, height);
+        taskList.setBounds(x+1, y+18, width-2, height-20);
         taskList.setDragEnabled(false);
+        taskList.setBackground(null);
         this.add(taskList);
     }
 
