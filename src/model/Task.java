@@ -5,18 +5,18 @@ import java.util.Date;
 
 public class Task {
 
-    public final String projectName;
-    public final String description;
-    public final String taskName;
-    public final String subTask1;
-    public final String subTask2;
-    public final String subTask3;
-    public final String subTask4;
-    public final String subTask5;
-    public final int importance;
-    public final String date;
-    public final int hour;
-    public final int minutes;
+    public String projectName;
+    public String description;
+    public String taskName;
+    public String subTask1;
+    public String subTask2;
+    public String subTask3;
+    public String subTask4;
+    public String subTask5;
+    public int importance;
+    public String date;
+    public int hour;
+    public int minutes;
     public String estimatedDuration;
     private Date dateTime;
 
@@ -41,6 +41,49 @@ public class Task {
 
     public Date getDateTime() {
         return dateTime;
+    }
+
+    public boolean removeSubTask(int subtaskNum) {
+        switch (subtaskNum) {
+            case 1:
+                subTask1 = "";
+
+                if (!subTask2.isEmpty()) {
+                    subTask1 = subTask2;
+                    subTask2 = "";
+                    return false;
+                }
+                if (!subTask3.isEmpty()) {
+                    subTask1 = subTask3;
+                    subTask3 = "";
+                    return false;
+                }
+                if (!subTask4.isEmpty()) {
+                    subTask1 = subTask4;
+                    subTask4 = "";
+                    return false;
+                }
+                if (!subTask5.isEmpty()) {
+                    subTask1 = subTask5;
+                    subTask5 = "";
+                    return false;
+                }
+                return true;
+            case 2:
+                subTask2 = "";
+                return false;
+            case 3:
+                subTask3 = "";
+                return false;
+            case 4:
+                subTask4 = "";
+                return false;
+            case 5:
+                subTask5 = "";
+                return false;
+        }
+
+        return false;
     }
 }
 

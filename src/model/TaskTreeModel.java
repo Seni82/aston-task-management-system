@@ -80,4 +80,16 @@ public class TaskTreeModel implements TreeModel {
             tml.treeStructureChanged(e);
         }
     }
+
+    public void fireLastNodeRemoved(TreeNode removed) {
+        ArrayList<TreeNode> path = new ArrayList<>();
+        path.add((TreeNode) root);
+
+        final int[] indicies = {0};
+        TreeModelEvent e = new TreeModelEvent(this, path.toArray(), indicies,
+                new Object[] {removed});
+        for (TreeModelListener tml : treeModelListeners) {
+            tml.treeNodesRemoved(e);
+        }
+    }
 }
