@@ -86,10 +86,6 @@ public class TaskTreePanel extends AbstractCommonComponents {
             String taskName = title.substring("Project Name: ".length());
             Task task = model.getTaskByName(taskName);
 
-            if (task.completed) {
-                JOptionPane.showMessageDialog(this, "Cannot delete completed", "Delete Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
 
             int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete?", "Delete?", JOptionPane.YES_NO_OPTION);
             if (result != JOptionPane.YES_OPTION) {
