@@ -5,11 +5,9 @@ import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilCalendarModel;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -208,13 +206,22 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
         Calendar date = dateModel.getValue();
         Date newDate = date.getTime();
-        SimpleDateFormat format = new SimpleDateFormat("dd MMM , yyyy.");
-        String myDate = format.format(newDate);
+
+        int numberOfDays=0;
+
+        if (!estimatedTaskDurationField.getText().trim().isEmpty()){
+            numberOfDays = Integer.parseInt(estimatedTaskDurationField.getText());
+        }
+        else if (estimatedTaskDurationField.getText().trim().isEmpty()) {
+            numberOfDays = 0;
+
+        }
+
         Task newTask = new Task(projectNameEntry.getText(), descriptionEntry.getText(),
                 importanceDropDownComponent.getSelectedIndex(),
-                (Integer)this.hour.getValue(), (Integer) this.minutes.getValue(),taskNameEntry.getText(),myDate,
+                (Integer)this.hour.getValue(), (Integer) this.minutes.getValue(),taskNameEntry.getText(), newDate,
                 subTask1NameEntry.getText(), subTask2NameEntry.getText(), subTask3NameEntry.getText(),
-                subTask4NameEntry.getText(), subTask5NameEntry.getText(), estimatedTaskDurationField.getText());
+                subTask4NameEntry.getText(), subTask5NameEntry.getText(), numberOfDays);
         model.addTask(newTask);
         clearField();
     }
