@@ -21,6 +21,9 @@ public class Task {
     public int estimatedDuration;
     private Date dateTime;
 
+    public boolean completed = false;
+    public boolean commenced = false;
+
 
     public Task(String projectName, String description, int importance, int hour, int minutes, String taskName, Date date,
                 String subTask1, String subTask2,
