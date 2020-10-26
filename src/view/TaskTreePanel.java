@@ -114,7 +114,7 @@ public class TaskTreePanel extends AbstractCommonComponents {
         searchButton = new JButton("Search");
         searchButton.setBounds(this.getWidth() - 130, 18, 125, 33);
         searchButton.setEnabled(true);
-        searchButton.setForeground(Color.WHITE);
+        searchButton.setForeground(Color.BLACK);
         searchButton.setBackground(Color.BLACK);
         this.add(searchButton);
         searchButton.addActionListener(this::actionPerformed);
