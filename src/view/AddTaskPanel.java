@@ -79,14 +79,14 @@ public class AddTaskPanel extends AbstractCommonComponents {
         this.model = model;
 
         //Project Name and field
-        createJLabel(projectName, "* Project Name:", 5, 20, FIELD_START - 2, 15, color);
+        createJLabel(projectName, "Project Name: *", 5, 20, FIELD_START - 2, 15, color);
         projectNameEntry = new JTextField();
         projectNameEntry.setBounds(FIELD_START, 18, 3 * (this.getWidth() - 150) / 4, 20);
         this.add(projectNameEntry);
 
 
         //Description and field name.
-        createJLabel(description, "Description:", 5, 45, FIELD_START - 2, 15, color);
+        createJLabel(description, "Description: *", 5, 45, FIELD_START - 2, 15, color);
         descriptionEntry = new JTextField();
         descriptionEntry.setBounds(FIELD_START, 43, this.getWidth() - 150, 20);
         this.add(descriptionEntry);
@@ -104,6 +104,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
         taskUpdateButton.setEnabled(true);
         taskUpdateButton.setBackground(Color.BLUE);
         taskUpdateButton.setForeground(Color.BLUE);
+        taskUpdateButton.addActionListener(this::updateTask);
         this.add(taskUpdateButton);
 
 
@@ -116,13 +117,13 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
 
         //Task Name Label and field name
-        createJLabel(taskName, "Task Name",5 , 70, FIELD_START - 2, 15, color);
+        createJLabel(taskName, "Task Name: *",5 , 70, FIELD_START - 2, 15, color);
         taskNameEntry = new JTextField();
         taskNameEntry.setBounds(FIELD_START , 68, 3*(this.getWidth()-150)/4, 20);
         this.add(taskNameEntry);
        
         //sub-task 1 (Needs to be made mandatory)
-        createJLabel(subTask1, "Sub Task 1:",5, 95, FIELD_START - 2, 15, color);
+        createJLabel(subTask1, "Sub Task 1: *",5, 95, FIELD_START - 2, 15, color);
         subTask1NameEntry = new JTextField();
         subTask1NameEntry.setBounds(FIELD_START , 93, 3*(this.getWidth()-150)/4, 20);
         this.add(subTask1NameEntry);
@@ -162,11 +163,11 @@ public class AddTaskPanel extends AbstractCommonComponents {
         datePicker = new JDatePickerImpl(datePanel);
         datePicker.setBounds(FIELD_START, 218, (this.getWidth()-150)/3, 25);
         this.add(datePicker);
-        createJLabel(taskDueDate, "Due Date:",5, 225, FIELD_START -2, 15, color);
+        createJLabel(taskDueDate, "Due Date: *",5, 225, FIELD_START -2, 15, color);
 
 
         //Task due time field
-        createJLabel(taskDueTime, "Due Time:",120+(this.getWidth()-220)/2, 225, 80 , 15, color);
+        createJLabel(taskDueTime, "Due Time: *",120+(this.getWidth()-220)/2, 225, 80 , 15, color);
         hour = new JSpinner(new SpinnerNumberModel(0, 0, 23, 1));
         hour.setBounds(195+(this.getWidth()-220)/2,220,(this.getWidth()-220)/5, 25);
         this.add(hour);
@@ -177,7 +178,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
 
         //Importance field and combo box.
-        createJLabel(taskImportance, "Importance:",5, 255, FIELD_START - 2, 15, color);
+        createJLabel(taskImportance, "Importance: *",5, 255, FIELD_START - 2, 15, color);
         importanceDropDownComponent = new JComboBox<>(AddTaskModel.IMPORTANCE_MODEL);
         importanceDropDownComponent.setBounds(FIELD_START, 255, (this.getWidth()-120)/3, 20);
         this.add(importanceDropDownComponent);
@@ -192,7 +193,7 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
 
         //Estimated Duration and field name.
-        createJLabel(estimatedTaskDuration, "Est. Duration:",5, 288, FIELD_START-2, 15, color);
+        createJLabel(estimatedTaskDuration, "Est. Duration: *",5, 288, FIELD_START-2, 15, color);
         estimatedTaskDurationField = new JTextField();
         estimatedTaskDurationField.setBounds(FIELD_START, 290, (this.getWidth()-220)/2, 20);
         this.add(estimatedTaskDurationField);
@@ -200,11 +201,9 @@ public class AddTaskPanel extends AbstractCommonComponents {
 
 
     private void addTaskEvent(ActionEvent actionEvent) {
+        if (!areFieldsValidated())
+            return;
 
-        if (projectNameEntry.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Project Name is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
-        return;
-        }
         Calendar date = dateModel.getValue();
         Date newDate = date.getTime();
 
@@ -227,6 +226,70 @@ public class AddTaskPanel extends AbstractCommonComponents {
         clearField();
     }
 
+    private void updateTask(ActionEvent event) {
+        if (!areFieldsValidated())
+            return;
+
+        Calendar date = dateModel.getValue();
+        Date newDate = date.getTime();
+        SimpleDateFormat format = new SimpleDateFormat("dd MMM , yyyy.");
+        String myDate = format.format(newDate);
+
+        Task task = model.getTaskByName(projectNameEntry.getText());
+        if (task == null) {
+            return;
+        }
+        task.description = descriptionEntry.getText();
+        task.taskName = taskNameEntry.getText();
+        task.subTask1 = subTask1NameEntry.getText();
+        task.subTask2 = subTask2NameEntry.getText();
+        task.subTask3 = subTask3NameEntry.getText();
+        task.subTask4 = subTask4NameEntry.getText();
+        task.subTask5 = subTask5NameEntry.getText();
+        task.importance = importanceDropDownComponent.getSelectedIndex();
+        task.hour = (Integer) this.hour.getValue();
+        task.minutes = (Integer) this.minutes.getValue();
+        task.estimatedDuration = estimatedTaskDurationField.getText();
+        task.date = myDate;
+
+        model.SortTree();
+        clearField();
+    }
+
+    private boolean areFieldsValidated() {
+        if (projectNameEntry.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Project Name is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (descriptionEntry.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Description is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (taskNameEntry.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Task Name is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (subTask1NameEntry.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "One Subtask must be entered", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        if (datePicker.getJFormattedTextField().getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Due Date is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+
+        if (estimatedTaskDurationField.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Est. Duration is missing", "Empty Required Field", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
 
     private void clearField()
     {
@@ -241,6 +304,22 @@ public class AddTaskPanel extends AbstractCommonComponents {
         datePicker.getJFormattedTextField().setText(null);
         importanceDropDownComponent.setSelectedItem(0);
         estimatedTaskDurationField.setText(null);
+    }
+
+    public void showTask(Task task) {
+        projectNameEntry.setText(task.projectName);
+        descriptionEntry.setText(task.description);
+        taskNameEntry.setText(task.taskName);
+        subTask1NameEntry.setText(task.subTask1);
+        subTask2NameEntry.setText(task.subTask2);
+        subTask3NameEntry.setText(task.subTask3);
+        subTask4NameEntry.setText(task.subTask4);
+        subTask5NameEntry.setText(task.subTask5);
+        datePicker.getJFormattedTextField().setText(task.date);
+        hour.setValue(task.hour);
+        minutes.setValue(task.minutes);
+        importanceDropDownComponent.setSelectedItem(task.importance);
+        estimatedTaskDurationField.setText(task.estimatedDuration);
     }
  }
 

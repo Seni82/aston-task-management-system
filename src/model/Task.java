@@ -61,6 +61,49 @@ public class Task {
     public int getImportance() {
         return -importance;
     }
+
+    public boolean removeSubTask(int subtaskNum) {
+        switch (subtaskNum) {
+            case 1:
+                subTask1 = "";
+
+                if (!subTask2.isEmpty()) {
+                    subTask1 = subTask2;
+                    subTask2 = "";
+                    return false;
+                }
+                if (!subTask3.isEmpty()) {
+                    subTask1 = subTask3;
+                    subTask3 = "";
+                    return false;
+                }
+                if (!subTask4.isEmpty()) {
+                    subTask1 = subTask4;
+                    subTask4 = "";
+                    return false;
+                }
+                if (!subTask5.isEmpty()) {
+                    subTask1 = subTask5;
+                    subTask5 = "";
+                    return false;
+                }
+                return true;
+            case 2:
+                subTask2 = "";
+                return false;
+            case 3:
+                subTask3 = "";
+                return false;
+            case 4:
+                subTask4 = "";
+                return false;
+            case 5:
+                subTask5 = "";
+                return false;
+        }
+
+        return false;
+    }
 }
 
 

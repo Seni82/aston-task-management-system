@@ -61,6 +61,7 @@ public class AppFrame extends JFrame {
         add_task_panel.setLocation(rightColumnStart,5);
         add_task_panel.setFocusable(false);
         pane.add(add_task_panel);
+        task_tree_panel.setAddTaskPanel(add_task_panel);
 
         comenced_task_panel = new CommencedTasksPanel("COMMENCED TASKS",0,1,rightColumnStart-100,
                 (height/3)-10,Color.blue, true,17, model);
