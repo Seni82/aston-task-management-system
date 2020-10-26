@@ -80,24 +80,6 @@ public class AppFrame extends JFrame {
         completed_task_panel.setFocusable(false);
         pane.add(completed_task_panel);
 
-
-
-//        eastFacingArrowButtonToMoveSelectedItemForUpdate = new BasicArrowButton(BasicArrowButton.EAST);
-//        eastFacingArrowButtonToMoveSelectedItemForUpdate.setBounds(task_tree_panel.getWidth()+(rightColumnStart-task_tree_panel.getWidth())/2-15
-//                ,height/3-30,30,40);
-//        eastFacingArrowButtonToMoveSelectedItemForUpdate.setBackground(Color.CYAN);
-//        eastFacingArrowButtonToMoveSelectedItemForUpdate.setEnabled(false);
-//        this.add(eastFacingArrowButtonToMoveSelectedItemForUpdate, BorderLayout.EAST);
-//
-//
-//        JLabel labelNameMoveTaskInformationLabel = new JLabel("Move task");
-//        labelNameMoveTaskInformationLabel.setBounds(task_tree_panel.getWidth()+(rightColumnStart-task_tree_panel.getWidth())/2-35,
-//                height/3+15, 100, 15);
-//        labelNameMoveTaskInformationLabel.setBackground(Color.RED);
-//        labelNameMoveTaskInformationLabel.setForeground(Color.RED);
-//        this.add(labelNameMoveTaskInformationLabel);
-
-
         completeTaskLabel = new JLabel("Complete");
         completeTaskLabel.setBounds(this.getWidth()/2-35,
                 (5*height/6)+15, 100, 15);
@@ -115,6 +97,12 @@ public class AppFrame extends JFrame {
             Task task = comenced_task_panel.getCommenced();
             if (task == null) {
                 return;
+            }
+
+            int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to mark this Project as complete?", "Completed?", JOptionPane.YES_NO_OPTION);
+            if (result != JOptionPane.YES_OPTION) {
+                return;
+
             }
 
             comenced_task_panel.clear();
